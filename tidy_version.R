@@ -31,7 +31,7 @@ head(my_data1)
 # my_data2
 
 my_data2 <- my_data2 |>
-  filter(year %in% c(2011:2021))
+  filter(year %in% c(2011:2021)) |>
   arrange(year)
 
 head(my_data2)
@@ -79,10 +79,9 @@ my_data4 <- my_data4 |>
 
 head(my_data4)
 
-# my_data5
-my_data5 <- read_csv("C:/Users/Tolkan/Documents/GitHub/emu430-fall2024-team-nrg/veriler.csv")
 
-my_data5 <- as.data.frame(my_data5)
+# my_data5
+
 my_data5 <- my_data5 |>
   rename(year = period,
          state_id = stateid,
