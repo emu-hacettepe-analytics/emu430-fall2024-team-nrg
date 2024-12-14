@@ -22,9 +22,17 @@ my_data1 <- my_data1 |>
          price_usd = `Price (USD)`
   )
 
+my_data1 <- my_data1 |>
+  filter(year %in% c(2011:2021)) |>
+  arrange(year)
+
 head(my_data1)
 
 # my_data2
+
+my_data2 <- my_data2 |>
+  filter(year %in% c(2011:2021))
+  arrange(year)
 
 head(my_data2)
 
@@ -35,6 +43,10 @@ my_data3 <- my_data3 |>
          code = Code,
          year = Year
   )
+
+my_data3 <- my_data3 |>
+  filter(year %in% c(2011:2021)) |>
+  arrange(year)
 
 head(my_data3)
 
@@ -62,7 +74,8 @@ my_data4 <- my_data4 |>
   )
 
 my_data4 <- my_data4 |>
-  filter(year %in% c(2011:2021))
+  filter(year %in% c(2011:2021)) |>
+  arrange(year)
 
 head(my_data4)
 
@@ -71,7 +84,8 @@ my_data5 <- read_csv("C:/Users/Tolkan/Documents/GitHub/emu430-fall2024-team-nrg/
 
 my_data5 <- as.data.frame(my_data5)
 my_data5 <- my_data5 |>
-  rename(state_id = stateid,
+  rename(year = period,
+         state_id = stateid,
          state_description = stateDescription,
          sector_id = sectorid,
          sector_name = sectorName,
@@ -79,6 +93,7 @@ my_data5 <- my_data5 |>
   ) 
 
 my_data5 <- my_data5 |>
-  filter(period %in% c(2011:2021))
+  filter(year %in% c(2011:2021)) |>
+  arrange(year)
 
 head(my_data5)
