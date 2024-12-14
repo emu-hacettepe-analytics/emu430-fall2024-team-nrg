@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "xxx' Project Lab"
+  title: "NRG's Project Lab"
   navbar:
     search: true
     left:
@@ -17,7 +17,7 @@ website:
             
     tools:
       - icon: github
-        href: https://twitter.com
+        href: https://github.com/orgs/emu-hacettepe-analytics/teams/nrg
 
   page-navigation: true
   back-to-top-navigation: true
@@ -28,9 +28,8 @@ format:
   html:
     toc: true
     toc-location: left
-    theme: 
-      light: simplex 
-      dark: cyborg
+    theme: cosmo
+      
     css: styles.css
 
 
