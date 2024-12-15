@@ -16,6 +16,7 @@ my_data4_numeric <- my_data4 |>
 # Explanation:
   # across(everything(), as.numeric): Applies as.numeric to every column in the data frame.
 
+# adjust the table
 
 my_data4_long <- my_data4_numeric |>
   pivot_longer(
@@ -24,7 +25,9 @@ my_data4_long <- my_data4_numeric |>
     values_to = "value"        
   )
 
-vehicle_trends <- ggplot(my_data4_long, aes(x = year, y = value, color = vehicle_type)) +
+# plot the data
+
+vehicle_trends_plot <- ggplot(my_data4_long, aes(x = year, y = value, color = vehicle_type)) +
   geom_line(size = 1) +
   theme_bw() +
   labs(
@@ -42,4 +45,6 @@ vehicle_trends <- ggplot(my_data4_long, aes(x = year, y = value, color = vehicle
    scale_x_continuous(breaks = 2011:2021) +
    theme(axis.text.x = element_text(angle = 90, hjust = 1))
   
-vehicle_trends
+vehicle_trends_plot
+
+
