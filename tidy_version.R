@@ -20,9 +20,7 @@ my_data1 <- my_data1 |>
          engine_size_l = `Engine Size (L)`,
          fuel_type = `Fuel Type`,
          price_usd = `Price (USD)`
-  )
-
-my_data1 <- my_data1 |>
+  ) |>
   filter(year %in% c(2011:2021)) |>
   arrange(year)
 
@@ -31,7 +29,9 @@ head(my_data1)
 # my_data2
 
 my_data2 <- my_data2 |>
-  filter(year %in% c(2011:2021)) |>
+  filter(year %in% c(2011:2021) &
+  parameter %in% c("EV stock", "EV stock share") &
+  powertrain %in% c("EV", "BEV")) |>
   arrange(year)
 
 head(my_data2)
@@ -42,9 +42,7 @@ my_data3 <- my_data3 |>
   rename(entity = Entity,
          code = Code,
          year = Year
-  )
-
-my_data3 <- my_data3 |>
+  ) |>
   filter(year %in% c(2011:2021)) |>
   arrange(year)
 
@@ -62,8 +60,7 @@ my_data4 <- my_data4 |>
          hybrid = `Hibrit (2)`,
          electric = Elektrik,
          unknown = `Bilinmeyen (3)`
-  )
-my_data4 <- my_data4 |>
+  ) |>
   rename(percentage_total = ...3,
          percentage_gas = ...5,
          percentage_diesel = ...7,
@@ -71,9 +68,7 @@ my_data4 <- my_data4 |>
          percentage_hybrid = ...11,
          percentage_electric = ...13,
          percentage_unknown = ...15
-  )
-
-my_data4 <- my_data4 |>
+  ) |>
   filter(year %in% c(2011:2021)) |>
   arrange(year)
 
@@ -89,9 +84,7 @@ my_data5 <- my_data5 |>
          sector_id = sectorid,
          sector_name = sectorName,
          price_in_units = `price-units`
-  ) 
-
-my_data5 <- my_data5 |>
+  ) |>
   filter(year %in% c(2011:2021)) |>
   arrange(year)
 
