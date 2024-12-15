@@ -3,7 +3,7 @@ title: "Team NRG"
 sidebar: false 
 ---
 
-![](docs/gif.gif){fig-align="center" width="300"}
+![](docs/gif.gif){fig-align="center" width="450"}
 
 # Team Members
 

@@ -29,8 +29,8 @@ format:
   html:
     toc: true
     toc-location: left
-    theme:
-      light: "cosmo"
+    theme: flatly
+    
     css: styles.css
     code-fold: true
 
