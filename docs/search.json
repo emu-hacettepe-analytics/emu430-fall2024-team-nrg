@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Team NRG",
     "section": "",
-    "text": "NRG’s Project Webpage\n\nTeam Members\n\nCerem Üstün\nGökhan Polat\nMustafa Alp Ulaş\nTolkan Aytemizel\nNehir Güner\n\n\n\nProject Topic\nThis project explores the role of electric vehicles (EVs) in reducing carbon emissions compared to traditional vehicles. The analysis is divided into three key sections: 1. Highlighting EV Benefits: Presenting data to demonstrate the low carbon emissions associated with electric vehicles, emphasizing their environmental advantages. 2. Global Trends: Presenting data on the adoption of EVs and transportation-related carbon emissions worldwide over the years, highlighting comparative trends. 3. Türkiye’s Status and Recommendations: Analyzing the progress of EV adoption in Türkiye, interpreting its current standing, and proposing actionable strategies based on global benchmarks to enhance sustainability in the transportation sector. This comprehensive study aims to shed light on the environmental benefits of EVs and offer data-driven recommendations for Türkiye’s transportation sector.\n\n\n\n\n Back to top"
+    "text": "Team Members\n\nCerem Üstün\nGökhan Polat\nMustafa Alp Ulaş\nTolkan Aytemizel\nNehir Güner\n\n\n\nProject Topic\nThis project explores the role of electric vehicles (EVs) in reducing carbon emissions compared to traditional vehicles. The analysis is divided into three key sections: 1. Highlighting EV Benefits: Presenting data to demonstrate the low carbon emissions associated with electric vehicles, emphasizing their environmental advantages. 2. Global Trends: Presenting data on the adoption of EVs and transportation-related carbon emissions worldwide over the years, highlighting comparative trends. 3. Türkiye’s Status and Recommendations: Analyzing the progress of EV adoption in Türkiye, interpreting its current standing, and proposing actionable strategies based on global benchmarks to enhance sustainability in the transportation sector. This comprehensive study aims to shed light on the environmental benefits of EVs and offer data-driven recommendations for Türkiye’s transportation sector.\n\n\n\n\n Back to top"
   },
   {
     "objectID": "about.html",
@@ -18,13 +18,13 @@
     "href": "analysis.html",
     "title": "Analysis",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n Back to top"
+    "text": "About this site\n\n\nCode\n1 + 1\n\n\n[1] 2\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "data.html",
     "href": "data.html",
     "title": "Data",
     "section": "",
-    "text": "Data Source\n1)https://www.kaggle.com/datasets/waqi786/cars-dataset-2010-2020 2)https://www.kaggle.com/datasets/fathyfathysahlool/electric-vehicles-cars-2011-2024 3)https://ourworldindata.org/grapher/co2-emissions-transport?time=latest 4)https://data.tuik.gov.tr/Bulten/Index?p=Motorlu-Kara-Tasitlari-Ekim-2024-53461 5)https://www.eia.gov/opendata/browser/co2-emissions/co2-emissions-aggregates?frequency=annual&data=value;&sortColumn=period;&sortDirection=desc;\n\n\nbaşlık 2\ngökhanım koda bak la\n\n\nCode\nprint(\"nABER\")\n\n\n[1] \"nABER\"\n\n\n\n\nbaşlık 3\n\n\n\n\n Back to top"
+    "text": "Data Source\n1)https://www.kaggle.com/datasets/waqi786/cars-dataset-2010-2020 2)https://www.kaggle.com/datasets/fathyfathysahlool/electric-vehicles-cars-2011-2024 3)https://ourworldindata.org/grapher/co2-emissions-transport?time=latest 4)https://data.tuik.gov.tr/Bulten/Index?p=Motorlu-Kara-Tasitlari-Ekim-2024-53461 5)https://www.eia.gov/opendata/browser/co2-emissions/co2-emissions-aggregates?frequency=annual&data=value;&sortColumn=period;&sortDirection=desc;\n\n\nbaşlık 2\n\n\nbaşlık 3\n\n\n\n\n Back to top"
   }
 ]
