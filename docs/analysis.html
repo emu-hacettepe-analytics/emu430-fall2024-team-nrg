@@ -150,13 +150,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#global-trends" id="toc-global-trends" class="nav-link active" data-scroll-target="#global-trends">Global Trends</a>
-  <ul class="collapse">
-  <li><a href="#library-preparation" id="toc-library-preparation" class="nav-link" data-scroll-target="#library-preparation">Library Preparation</a></li>
+  <li><a href="#library-preparation" id="toc-library-preparation" class="nav-link active" data-scroll-target="#library-preparation">Library Preparation</a></li>
   <li><a href="#income-based-mean-emission" id="toc-income-based-mean-emission" class="nav-link" data-scroll-target="#income-based-mean-emission">Income Based Mean Emission</a></li>
   <li><a href="#income-based-mean-emission-1" id="toc-income-based-mean-emission-1" class="nav-link" data-scroll-target="#income-based-mean-emission-1">Income Based Mean Emission</a></li>
   <li><a href="#country-based-mean-emission" id="toc-country-based-mean-emission" class="nav-link" data-scroll-target="#country-based-mean-emission">Country Based Mean Emission</a></li>
-  </ul></li>
   <li><a href="#global-ev-sales" id="toc-global-ev-sales" class="nav-link" data-scroll-target="#global-ev-sales">Global EV Sales</a></li>
   <li><a href="#turkeys-status" id="toc-turkeys-status" class="nav-link" data-scroll-target="#turkeys-status">Turkey’s Status</a>
   <ul class="collapse">
@@ -192,8 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="global-trends" class="level1">
-<h1>Global Trends</h1>
+<p>About this site # Global Trends</p>
 <section id="library-preparation" class="level2">
 <h2 class="anchored" data-anchor-id="library-preparation">Library Preparation</h2>
 </section>
@@ -488,7 +484,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>COVID-19 pandemic has affected the carbondioxide emission levels in a positive way, resulting in kind of a V-shaped pattern for all countries listed.</p>
 </section>
-</section>
 <section id="global-ev-sales" class="level1">
 <h1>Global EV Sales</h1>
 <p>What about the other countries’ adoption on EV’s?</p>
@@ -756,15 +751,22 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tr_vehicle_perc_long, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> percentage, <span class="at">fill =</span> vehicle_type)) <span class="sc">+</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">width =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Paired"</span>) <span class="sc">+</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Percentage"</span>,</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Vehicle Propensity in Turkey Over Time"</span>,</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"From 2011 to 2021"</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tr_vehicle_perc_long, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> percentage, <span class="at">fill =</span> vehicle_type)) <span class="sc">+</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">width =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Paired"</span>) <span class="sc">+</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Percentage"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Vehicle Propensity in Turkey Over Time"</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"From 2011 to 2021"</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -782,21 +784,21 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>tr_emission <span class="ot">&lt;-</span> my_data3 <span class="sc">|&gt;</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(entity <span class="sc">==</span> <span class="st">"Turkey"</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>tr_vehicle <span class="ot">&lt;-</span> my_data4 <span class="sc">|&gt;</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, total)</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>tr_vehicle<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(tr_vehicle<span class="sc">$</span>year)</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>tr_emission_n_vehicle <span class="ot">&lt;-</span> tr_emission <span class="sc">|&gt;</span></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(tr_vehicle, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"year"</span>))</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>tr_emission_n_vehicle<span class="sc">$</span>total <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(tr_emission_n_vehicle<span class="sc">$</span>total)</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>tr_emission_n_vehicle<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(tr_emission_n_vehicle<span class="sc">$</span>year)</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tr_emission_n_vehicle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>tr_emission <span class="ot">&lt;-</span> my_data3 <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(entity <span class="sc">==</span> <span class="st">"Turkey"</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>tr_vehicle <span class="ot">&lt;-</span> my_data4 <span class="sc">|&gt;</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, total)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>tr_vehicle<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(tr_vehicle<span class="sc">$</span>year)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>tr_emission_n_vehicle <span class="ot">&lt;-</span> tr_emission <span class="sc">|&gt;</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(tr_vehicle, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"year"</span>))</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>tr_emission_n_vehicle<span class="sc">$</span>total <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(tr_emission_n_vehicle<span class="sc">$</span>total)</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>tr_emission_n_vehicle<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(tr_emission_n_vehicle<span class="sc">$</span>year)</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tr_emission_n_vehicle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  entity code year transport_co2_emissions    total
@@ -811,21 +813,21 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>tr_avg_emission <span class="ot">&lt;-</span> tr_emission_n_vehicle <span class="sc">|&gt;</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">avg_co2_emission_per_vehicle =</span> transport_co2_emissions <span class="sc">/</span> total) <span class="sc">|&gt;</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> avg_co2_emission_per_vehicle)) <span class="sc">+</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2011</span><span class="sc">:</span><span class="dv">2021</span>) <span class="sc">+</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">2020</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">x =</span> <span class="dv">2020</span>, <span class="at">y =</span> <span class="fl">5.5</span>, <span class="at">label =</span> <span class="st">"pandemic"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average CO2 Emission per Year"</span>,</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Average CO2 Emission Per Vehicle in Turkey (in tons)"</span>,</span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"How much carbondioxide does a vehicle emit on the average?"</span></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>tr_avg_emission</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>tr_avg_emission <span class="ot">&lt;-</span> tr_emission_n_vehicle <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">avg_co2_emission_per_vehicle =</span> transport_co2_emissions <span class="sc">/</span> total) <span class="sc">|&gt;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> avg_co2_emission_per_vehicle)) <span class="sc">+</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2011</span><span class="sc">:</span><span class="dv">2021</span>) <span class="sc">+</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">2020</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">x =</span> <span class="dv">2020</span>, <span class="at">y =</span> <span class="fl">5.5</span>, <span class="at">label =</span> <span class="st">"pandemic"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average CO2 Emission per Year"</span>,</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Average CO2 Emission Per Vehicle in Turkey (in tons)"</span>,</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"How much carbondioxide does a vehicle emit on the average?"</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>tr_avg_emission</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
