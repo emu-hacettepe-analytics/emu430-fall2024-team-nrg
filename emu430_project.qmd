@@ -28,7 +28,6 @@ library(ggthemes)
 library(forcats)
 
 ```{r load-workspace}
-#| include: false
 load("emu430_project_workspace.RData")
 ```
 
