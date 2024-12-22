@@ -7,6 +7,7 @@ title: "emu430_1"
 ## Library Preparation
 
 ```{r}
+#| include: false
 library(dplyr)
 library(ggplot2)
 library(tidyr)
@@ -15,6 +16,20 @@ library(readr)
 library(readxl)
 library(ggthemes)
 library(forcats)
+```
+
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(scales)
+library(readr)
+library(readxl)
+library(ggthemes)
+library(forcats)
+
+```{r load-workspace}
+#| include: false
+load("emu430_project_workspace.RData")
 ```
 
 ## Income Based Mean Emission
