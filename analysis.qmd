@@ -2,12 +2,9 @@
 title: "Analysis"
 ---
 
-About this site
-# Global Trends
+About this site \# Global Trends
 
-## Library Preparation
-
-
+# Library Preparation
 
 ```{r}
 #| echo: true
@@ -23,19 +20,35 @@ library(ggthemes)
 library(forcats)
 ```
 
-## Income Based Mean Emission
-
-Let's first visualize how the mean carbondioxide emissions has changed by countries' income level.
-
-## Income Based Mean Emission
-
-Let's first visualize how the mean carbondioxide emissions has changed by countries' income level.
-
 ```{r load-workspace}
 #| include: false
 load("emu430_project_workspace.RData")
 ```
+# Income Based Mean Emission
 
+## my_data3
+
+In this part of analysing, my_data3 will be using. Therefore, here is the general information that's needed:
+
+```{r}
+str(my_data3)
+```
+
+**entity:** A character column in my_data3 data set which represents the countries, continents, some income levels and the world.
+
+**code:** A character column in my_data3 data set which represents the codes of the countries. (There are no codes for noncountries)
+
+**year:** An integer column in my_data3 data set which represents the year.
+
+**transport_co2_emissions:** A numeric column in my_data3 data set which represents the total carbon emission in ton.
+
+**countries_by_income:** A value distribution which represents the countries according to their income levels. These levels are: Upper-middle-income countries, Lower-middle-income countries, Low-income countries and High-income countries.
+
+**total_co2_emission_by_income:** Bunu degistirebiliriz. Line plot yapilabilir duzeltilsin.
+
+## Analysis
+
+Let's first visualize how the mean carbondioxide emissions has changed by countries' income level.
 
 ```{r, F}
 countries_by_income <- c(
@@ -69,7 +82,7 @@ ggplot(total_co2_emission_by_income, aes(x = reorder(income_class, total_co2_inc
 
 As expected, the more income levels, the high emission levels that a country would have.
 
-## Country Based Mean Emission
+# Country Based Mean Emission
 
 Let's take a final look at the top 20 countries' mean carbondioxide emission.
 
@@ -267,9 +280,56 @@ top6_ev_sales |> group_by(year, region, powertrain) |>
 top6_ev_sales
 ```
 
+```{r}
+str(my_data2)
+```
+
+**year:** A column in my_data2 data set which represents the year.
+
+**region:** A column in my_data2 data set which represents the countries and the world.
+
+**powertrain:** A column in my_data2 data set which represents how the vehicle gets its power from, a.k.a. type of the powertrain that the vehicle uses which are EV, BEV, PHEV etc.
+
 All countries in the plot increased their non-carbon emitting vehicle sales after 10-year horizon. However, Turkey has not been adopted FCEV's through 2021 while the other countries are using FCEV's more year by year. China has started using FCEV's (in 2016) later than the others (in 2011-2014). It can be also observed that BEV sales has started 2012 in Turkey.
 
 # Turkey's Status
+
+## my_data4
+
+In this part of analysing, my_data4 will be using. Therefore, here is the general information that's needed:
+
+```{r}
+str(my_data4)
+```
+**year:** A character column in my_data4 data set which represents the year.
+
+**total:** A character column in my_data4 data set which represents the total number of vehicles that are on traffic.
+
+**percentage_total:** A character column which represents the total number of vehicles over total number of vehicles.
+
+**gas:** A column in my_data4 data set which represents the vehicles which operates with gas.
+
+**percentage_gas:** A character column which represents the number of vehicles that uses gas over total number of vehicles.
+
+**diesel:** A column in my_data4 data set which represents the vehicles which operates with diesel.
+
+**percentage_diesel:** A character column which represents the number of vehicles that are diesel over total number of vehicles.
+
+**lpg:** A column in my_data4 data set which represents the vehicles which operates with LPG.
+
+**percentage_lpg:** A character column which represents the number of vehicles that uses lpg over total number of vehicles.
+
+**hybrid:** A column in my_data4 data set which represents the vehicles which operates with hybrid.
+
+**percentage_hybrid:** A character column which represents the number of vehicles that are hybrid over total number of vehicles.
+
+**electric:** A column in my_data4 data set which represents the vehicles which operates with electric.
+
+**percentage_electric:** A character column which represents the number of vehicles that uses electric over total number of vehicles.
+
+**unknown:** A column in my_data4 data set which represents the vehicles which operates with unknown power.
+
+**percentage_unknown:** A character column which represents the number of vehicles that are unknown over total number of vehicles.
 
 ## Vehicle Trends
 
@@ -309,7 +369,6 @@ ggplot(tr_vehicle_num_long, aes(x = year, y = value, color = vehicle_type)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)
   )
 ```
-
 
 Although there was an increase in EV's and hybrid vehicles, Turkey's carbondioxide emission has increased consistently and the effect of COVID-19 pandemic was quite temporary on it.
 
