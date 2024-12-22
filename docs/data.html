@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -117,8 +151,9 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#data-source" id="toc-data-source" class="nav-link active" data-scroll-target="#data-source">Data Source</a></li>
-  <li><a href="#başlık-2" id="toc-başlık-2" class="nav-link" data-scroll-target="#başlık-2">başlık 2</a></li>
-  <li><a href="#başlık-3" id="toc-başlık-3" class="nav-link" data-scroll-target="#başlık-3">başlık 3</a></li>
+  <li><a href="#global-ev-sales-data-my_data2" id="toc-global-ev-sales-data-my_data2" class="nav-link" data-scroll-target="#global-ev-sales-data-my_data2">GLOBAL EV SALES DATA (my_data2)</a></li>
+  <li><a href="#co2-emission-from-transport-data-my_data3" id="toc-co2-emission-from-transport-data-my_data3" class="nav-link" data-scroll-target="#co2-emission-from-transport-data-my_data3">CO2 EMISSION FROM TRANSPORT DATA (my_data3)</a></li>
+  <li><a href="#turkiyes-vehicle-data-my_data4" id="toc-turkiyes-vehicle-data-my_data4" class="nav-link" data-scroll-target="#turkiyes-vehicle-data-my_data4">TURKIYE’S VEHICLE DATA (my_data4)</a></li>
   </ul>
 </nav>
 </nav>
@@ -150,13 +185,107 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="data-source" class="level1">
 <h1>Data Source</h1>
-<p>1)<a href="https://www.kaggle.com/datasets/waqi786/cars-dataset-2010-2020" class="uri">https://www.kaggle.com/datasets/waqi786/cars-dataset-2010-2020</a> 2)<a href="https://www.kaggle.com/datasets/fathyfathysahlool/electric-vehicles-cars-2011-2024" class="uri">https://www.kaggle.com/datasets/fathyfathysahlool/electric-vehicles-cars-2011-2024</a> 3)<a href="https://ourworldindata.org/grapher/co2-emissions-transport?time=latest" class="uri">https://ourworldindata.org/grapher/co2-emissions-transport?time=latest</a> 4)<a href="https://data.tuik.gov.tr/Bulten/Index?p=Motorlu-Kara-Tasitlari-Ekim-2024-53461" class="uri">https://data.tuik.gov.tr/Bulten/Index?p=Motorlu-Kara-Tasitlari-Ekim-2024-53461</a> 5)<a href="https://www.eia.gov/opendata/browser/co2-emissions/co2-emissions-aggregates?frequency=annual&amp;data=value;&amp;sortColumn=period;&amp;sortDirection=desc;" class="uri">https://www.eia.gov/opendata/browser/co2-emissions/co2-emissions-aggregates?frequency=annual&amp;data=value;&amp;sortColumn=period;&amp;sortDirection=desc;</a></p>
+<p>1)<a href="https://www.kaggle.com/datasets/fathyfathysahlool/electric-vehicles-cars-2011-2024">my_data2</a></p>
+<p>2)<a href="https://ourworldindata.org/grapher/co2-emissions-transport?time=latest">my_data3</a></p>
+<p>3)<a href="https://data.tuik.gov.tr/Bulten/Index?p=Motorlu-Kara-Tasitlari-Ekim-2024-53461">my_data4</a></p>
 </section>
-<section id="başlık-2" class="level1">
-<h1>başlık 2</h1>
+<section id="global-ev-sales-data-my_data2" class="level1">
+<h1>GLOBAL EV SALES DATA (my_data2)</h1>
+<p>This data is used for detecting global electric vehicle sales by country and across the world.</p>
+<p>To download this data, the following codes are used.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>my_data2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C:/Users/cerem/downloads/IEA Global EV Data 2024.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data2, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 8
+   region    category   parameter      mode  powertrain  year unit         value
+   &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
+ 1 Australia Historical EV stock share Cars  EV          2011 percent    3.90e-4
+ 2 Australia Historical EV sales share Cars  EV          2011 percent    6.50e-3
+ 3 Australia Historical EV sales       Cars  BEV         2011 Vehicles   4.9 e+1
+ 4 Australia Historical EV stock       Cars  BEV         2011 Vehicles   4.9 e+1
+ 5 Australia Historical EV stock       Cars  BEV         2012 Vehicles   2.2 e+2
+ 6 Australia Historical EV sales       Cars  BEV         2012 Vehicles   1.7 e+2
+ 7 Australia Historical EV sales share Cars  EV          2012 percent    3.00e-2
+ 8 Australia Historical EV stock share Cars  EV          2012 percent    2.40e-3
+ 9 Australia Historical EV stock       Cars  PHEV        2012 Vehicles   8   e+1
+10 Australia Historical EV sales       Cars  PHEV        2012 Vehicles   8   e+1</code></pre>
+</div>
+</div>
 </section>
-<section id="başlık-3" class="level1">
-<h1>başlık 3</h1>
+<section id="co2-emission-from-transport-data-my_data3" class="level1">
+<h1>CO2 EMISSION FROM TRANSPORT DATA (my_data3)</h1>
+<p>This data is used to determine vehicle-related CO??? emissions globally and by country.</p>
+<p>To download this data, the following codes are used.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch the data</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>my_data3 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://ourworldindata.org/grapher/co2-emissions-transport.csv?v=1&amp;csvType=full&amp;useColumnShortNames=true"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch the metadata</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">"https://ourworldindata.org/grapher/co2-emissions-transport.metadata.json?v=1&amp;csvType=full&amp;useColumnShortNames=true"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data3, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Entity Code Year transport_co2_emissions
+1  Afghanistan  AFG 1990                  970000
+2  Afghanistan  AFG 1991                  930000
+3  Afghanistan  AFG 1992                  740000
+4  Afghanistan  AFG 1993                  740000
+5  Afghanistan  AFG 1994                  730000
+6  Afghanistan  AFG 1995                  730000
+7  Afghanistan  AFG 1996                  700000
+8  Afghanistan  AFG 1997                  670000
+9  Afghanistan  AFG 1998                  670000
+10 Afghanistan  AFG 1999                  490000</code></pre>
+</div>
+</div>
+</section>
+<section id="turkiyes-vehicle-data-my_data4" class="level1">
+<h1>TURKIYE’S VEHICLE DATA (my_data4)</h1>
+<p>This data is used to analyse Turkiye’s status about EVs.</p>
+<p>To download this data, the following codes are used.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#The following code is used to download the data from excel. Necessary adaptions must be made according to your localcomputer. </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#my_data4 &lt;- read_excel("C:/dosyalar/veriler.xls",sheet = 1)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data4, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 15
+   year  total    percentage_total gas   percentage_gas diesel percentage_diesel
+   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;            
+ 1 2011  8113111  100              3036… 37.4225004440… 17560… 21.6443975683310…
+ 2 2012  8648875  100              2929… 33.8681736063… 21012… 24.2945585408506…
+ 3 2013  9283923  100.00000000000… 2888… 31.1141098434… 24972… 26.8982088714005…
+ 4 2014  9857915  100.00000000000… 2855… 28.9622907075… 28828… 29.2443686114152…
+ 5 2015  10589337 100              2927… 27.6478121340… 33459… 31.5973606279599…
+ 6 2016  11317998 100.00000000000… 3031… 26.7869282182… 38037… 33.6081699254585…
+ 7 2017  12035978 100              3120… 25.9256622104… 42563… 35.3631836149916…
+ 8 2018  12398190 100              3089… 24.9199762223… 45686… 36.8494514118593…
+ 9 2019  12503049 99.999999999999… 3020… 24.1542442967… 47697… 38.1484068406034…
+10 2020  13099041 100.00000000000… 3201… 24.4437283614… 50143… 38.2803290714182…
+# ℹ 8 more variables: lpg &lt;chr&gt;, percentage_lpg &lt;chr&gt;, hybrid &lt;chr&gt;,
+#   percentage_hybrid &lt;chr&gt;, electric &lt;chr&gt;, percentage_electric &lt;chr&gt;,
+#   unknown &lt;chr&gt;, percentage_unknown &lt;chr&gt;</code></pre>
+</div>
+</div>
 
 
 </section>

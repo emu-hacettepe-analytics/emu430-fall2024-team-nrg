@@ -10,9 +10,9 @@ About this site
 
 
 ```{r}
+#| echo: true
 #| message: false
 #| warning: false
-#| include: false
 library(dplyr)
 library(ggplot2)
 library(tidyr)
