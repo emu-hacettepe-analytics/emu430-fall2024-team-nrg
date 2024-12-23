@@ -4,11 +4,11 @@ title: "Data"
 
 # Data Source
 
-1)[my_data2](https://www.kaggle.com/datasets/fathyfathysahlool/electric-vehicles-cars-2011-2024) 
+1)[my_data2](https://www.kaggle.com/datasets/fathyfathysahlool/electric-vehicles-cars-2011-2024)
 
-2)[my_data3](https://ourworldindata.org/grapher/co2-emissions-transport?time=latest) 
+2)[my_data3](https://ourworldindata.org/grapher/co2-emissions-transport?time=latest)
 
-3)[my_data4](https://data.tuik.gov.tr/Bulten/Index?p=Motorlu-Kara-Tasitlari-Ekim-2024-53461) 
+3)[my_data4](https://data.tuik.gov.tr/Bulten/Index?p=Motorlu-Kara-Tasitlari-Ekim-2024-53461)
 
 ```{r load-workspace}
 #| include: false
@@ -17,9 +17,9 @@ load("emu430_project_workspace.RData")
 
 # GLOBAL EV SALES DATA (my_data2)
 
-  This data is used for detecting global electric vehicle sales by country and across the world.
-  
-  To download this data, the following codes are used. 
+This data is used for detecting global electric vehicle sales by country and across the world.
+
+To download this data, the following codes are used.
 
 ```{r}
 #| warning: false
@@ -33,10 +33,10 @@ head(my_data2, 10)
 
 # CO2 EMISSION FROM TRANSPORT DATA (my_data3)
 
- This data is used to determine vehicle-related CO??? emissions globally and by country.
- 
- To download this data, the following codes are used. 
- 
+This data is used to determine vehicle-related CO??? emissions globally and by country.
+
+To download this data, the following codes are used.
+
 ```{r}
 library(jsonlite)
 
@@ -50,11 +50,11 @@ head(my_data3, 10)
 ```
 
 # TURKIYE'S VEHICLE DATA (my_data4)
-  
-  This data is used to analyse Turkiye's status about EVs.
-  
-  To download this data, the following codes are used. 
-  
+
+This data is used to analyse Turkiye's status about EVs.
+
+To download this data, the following codes are used.
+
 ```{r}
 library(readxl)
 
@@ -64,26 +64,3 @@ library(readxl)
 
 head(my_data4, 10)
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
