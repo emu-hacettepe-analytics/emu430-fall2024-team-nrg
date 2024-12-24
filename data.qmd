@@ -68,7 +68,7 @@ library(readxl)
 head(my_data4, 10)
 ```
 
-#POPULATION DATA (my_data8)
+# POPULATION DATA (my_data8)
 
 This data is used to determine transportation CO2 emissions per person for each country.
 
