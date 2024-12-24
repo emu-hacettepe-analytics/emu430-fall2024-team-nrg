@@ -177,6 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>1)<a href="https://www.kaggle.com/datasets/fathyfathysahlool/electric-vehicles-cars-2011-2024">my_data2</a></p>
 <p>2)<a href="https://ourworldindata.org/grapher/co2-emissions-transport?time=latest">my_data3</a></p>
 <p>3)<a href="https://data.tuik.gov.tr/Bulten/Index?p=Motorlu-Kara-Tasitlari-Ekim-2024-53461">my_data4</a></p>
+<p>4)<a href="https://ourworldindata.org/population-growth">my_data8</a></p>
 </section>
 <section id="global-ev-sales-data-my_data2" class="level1">
 <h1>GLOBAL EV SALES DATA (my_data2)</h1>
@@ -188,28 +189,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># my_data2 &lt;- read_csv("C:/Users/cerem/downloads/IEA Global EV Data 2024.csv")</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#The following code is used to download the data from excel. Necessary adaptions must be made according to your local computer.</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># head(my_data2, 10)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># my_data2 &lt;- read_csv("C:/files/my_data2.csv")</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data2, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 8
+   region    category   parameter          mode   powertrain  year unit    value
+   &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;              &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+ 1 Australia Historical EV stock share     Cars   EV          2011 perc… 3.90e-4
+ 2 Australia Historical EV sales share     Cars   EV          2011 perc… 6.50e-3
+ 3 Australia Historical EV sales           Cars   BEV         2011 Vehi… 4.9 e+1
+ 4 Australia Historical EV stock           Cars   BEV         2011 Vehi… 4.9 e+1
+ 5 Austria   Historical EV stock share     Cars   EV          2011 perc… 2.20e-2
+ 6 Austria   Historical EV charging points EV     Publicly …  2011 char… 1.00e-1
+ 7 Austria   Historical EV charging points EV     Publicly …  2011 char… 1.00e-1
+ 8 Austria   Historical EV stock           Cars   BEV         2011 Vehi… 9.9 e+2
+ 9 Belgium   Historical EV stock share     Trucks EV          2011 perc… 4.00e-3
+10 Belgium   Historical EV stock share     Cars   EV          2011 perc… 6.50e-3</code></pre>
+</div>
 </div>
 </section>
 <section id="co2-emission-from-transport-data-my_data3" class="level1">
 <h1>CO2 EMISSION FROM TRANSPORT DATA (my_data3)</h1>
-<p>This data is used to determine vehicle-related CO??? emissions globally and by country.</p>
+<p>This data is used to determine vehicle-related CO2 emissions globally and by country.</p>
 <p>To download this data, the following codes are used.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch the data</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>my_data3 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://ourworldindata.org/grapher/co2-emissions-transport.csv?v=1&amp;csvType=full&amp;useColumnShortNames=true"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch the metadata</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">"https://ourworldindata.org/grapher/co2-emissions-transport.metadata.json?v=1&amp;csvType=full&amp;useColumnShortNames=true"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data3, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch the data</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>my_data3 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://ourworldindata.org/grapher/co2-emissions-transport.csv?v=1&amp;csvType=full&amp;useColumnShortNames=true"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch the metadata</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">"https://ourworldindata.org/grapher/co2-emissions-transport.metadata.json?v=1&amp;csvType=full&amp;useColumnShortNames=true"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data3, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>        Entity Code Year transport_co2_emissions
@@ -233,14 +251,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#The following code is used to download the data from excel. Necessary adaptions must be made according to your localcomputer. </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#my_data4 &lt;- read_excel("C:/dosyalar/veriler.xls",sheet = 1)</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># head(my_data4, 10)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#The following code is used to download the data from excel. Necessary adaptions must be made according to your local computer. </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#my_data4 &lt;- read_excel("C:/files/my_data4.xls",sheet = 1)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data4, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 15
+   year  total    percentage_total gas   percentage_gas diesel percentage_diesel
+   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;            
+ 1 2011  8113111  100              3036… 37.4225004440… 17560… 21.6443975683310…
+ 2 2012  8648875  100              2929… 33.8681736063… 21012… 24.2945585408506…
+ 3 2013  9283923  100.00000000000… 2888… 31.1141098434… 24972… 26.8982088714005…
+ 4 2014  9857915  100.00000000000… 2855… 28.9622907075… 28828… 29.2443686114152…
+ 5 2015  10589337 100              2927… 27.6478121340… 33459… 31.5973606279599…
+ 6 2016  11317998 100.00000000000… 3031… 26.7869282182… 38037… 33.6081699254585…
+ 7 2017  12035978 100              3120… 25.9256622104… 42563… 35.3631836149916…
+ 8 2018  12398190 100              3089… 24.9199762223… 45686… 36.8494514118593…
+ 9 2019  12503049 99.999999999999… 3020… 24.1542442967… 47697… 38.1484068406034…
+10 2020  13099041 100.00000000000… 3201… 24.4437283614… 50143… 38.2803290714182…
+# ℹ 8 more variables: lpg &lt;chr&gt;, percentage_lpg &lt;chr&gt;, hybrid &lt;chr&gt;,
+#   percentage_hybrid &lt;chr&gt;, electric &lt;chr&gt;, percentage_electric &lt;chr&gt;,
+#   unknown &lt;chr&gt;, percentage_unknown &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>#POPULATION DATA (my_data8)</p>
+<p>This data is used to determine transportation CO2 emissions per person for each country.</p>
+<p>To download this data, the following codes are used.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#The following code is used to download the data from excel. Necessary adaptions must be made according to your local computer.</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># my_data2 &lt;- read_csv("C:/files/my_data8.csv")</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data8, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        entity year population
+1  Afghanistan 2011   29347709
+2  Afghanistan 2012   30560036
+3  Afghanistan 2013   31622708
+4  Afghanistan 2014   32792527
+5  Afghanistan 2015   33831765
+6  Afghanistan 2016   34700614
+7  Afghanistan 2017   35688942
+8  Afghanistan 2018   36743040
+9  Afghanistan 2019   37856126
+10 Afghanistan 2020   39068978</code></pre>
+</div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
