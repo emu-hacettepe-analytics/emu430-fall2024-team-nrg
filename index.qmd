@@ -1,5 +1,4 @@
 ---
-title: "Team NRG"
 sidebar: false 
 ---
 
@@ -20,3 +19,5 @@ sidebar: false
 # Project Topic
 
 This project explores the role of electric vehicles (EVs) in reducing carbon emissions compared to traditional vehicles. The analysis is divided into three key sections: 1. Highlighting EV Benefits: Presenting data to demonstrate the low carbon emissions associated with electric vehicles, emphasizing their environmental advantages. 2. Global Trends: Presenting data on the adoption of EVs and transportation-related carbon emissions worldwide over the years, highlighting comparative trends. 3. Türkiye's Status and Recommendations: Analyzing the progress of EV adoption in Türkiye, interpreting its current standing, and proposing actionable strategies based on global benchmarks to enhance sustainability in the transportation sector. This comprehensive study aims to shed light on the environmental benefits of EVs and offer data-driven recommendations for Türkiye’s transportation sector.
+
+![](docs/chillguy-chill.gif){fig-align="center" width="%25"}

@@ -1,5 +1,4 @@
 ---
-title: "Analysis"
 format:
   html:
     code-tools: true
@@ -7,6 +6,8 @@ format:
 execute:
   warning: false
 ---
+
+![](docs/kowalski-analysis-thinking.gif){fig-align="center" width="%20"}
 
 # Library Preparation
 
@@ -611,3 +612,5 @@ tr_avg_emission <- tr_emission_n_vehicle |>
 
 tr_avg_emission
 ```
+
+![](docs/jaydenj-kirby.gif){fig-align="center" width="%30"}

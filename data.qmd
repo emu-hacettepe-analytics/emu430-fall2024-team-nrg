@@ -1,6 +1,4 @@
----
-title: "Data"
----
+![](docs/batman-thinking.gif){fig-align="center" width="%20"}
 
 # Data Source
 
@@ -64,3 +62,5 @@ library(readxl)
 
 # head(my_data4, 10)
 ```
+
+![](docs/date-everywhere-data.gif){fig-align="center" width="400"}
