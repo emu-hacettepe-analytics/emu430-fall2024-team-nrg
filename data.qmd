@@ -26,9 +26,9 @@ To download this data, the following codes are used.
 library(readr)
 library(readxl)
 
-my_data2 <- read_csv("C:/Users/cerem/downloads/IEA Global EV Data 2024.csv")
+# my_data2 <- read_csv("C:/Users/cerem/downloads/IEA Global EV Data 2024.csv")
 
-head(my_data2, 10)
+# head(my_data2, 10)
 ```
 
 # CO2 EMISSION FROM TRANSPORT DATA (my_data3)
@@ -62,5 +62,5 @@ library(readxl)
 
 #my_data4 <- read_excel("C:/dosyalar/veriler.xls",sheet = 1)
 
-head(my_data4, 10)
+# head(my_data4, 10)
 ```
