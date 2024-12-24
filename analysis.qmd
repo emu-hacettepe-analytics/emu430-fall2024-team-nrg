@@ -1,5 +1,11 @@
 ---
 title: "Analysis"
+format:
+  html:
+    code-tools: true
+    code-fold: true
+execute:
+  warning: false
 ---
 
 # Library Preparation
@@ -7,7 +13,6 @@ title: "Analysis"
 ```{r}
 #| echo: true
 #| message: false
-#| warning: false
 library(dplyr)
 library(ggplot2)
 library(tidyr)
@@ -23,9 +28,9 @@ library(forcats)
 load("emu430_project_workspace.RData")
 ```
 
-# ANALAYSIS WITH CO2 EMISSION FROM TRANSPORT DATA (my_data3)
+# ANALYSIS OF CO2 EMISSION FROM TRANSPORT DATA (my_data3)
 
-In this part of analysing, my_data3 will be using. Therefore, here is the general information that's needed:
+my_data3 will be used for this part of analysis. Therefore, here is the general information that's needed:
 
 ```{r}
 #| echo: true
@@ -34,14 +39,15 @@ str(my_data3)
 
 **entity:** A character column in my_data3 data set which represents the countries, continents, some income levels and the world.
 
-**code:** A character column in my_data3 data set which represents the codes of the countries. (There are no codes for noncountries)
+**code:** A character column in my_data3 data set which represents the codes of the countries. (There are no codes for non-countries)
 
 **year:** An integer column in my_data3 data set which represents the year.
 
-**transport_co2_emissions:** A numeric column in my_data3 data set which represents the total carbon emission in ton.
+**transport_co2_emissions:** A numeric column in my_data3 data set which represents the total carbon emission in tons.
 
 ## Country Based Mean Transportation CO2 Emission
-Final look at the top 20 countries' mean transportation carbondioxide emission from 2011 to 2021. To do this, entity column of my_data3 has tidied.
+
+Let's take a look at the top 20 countries' mean transportation carbondioxide emission from 2011 to 2021. To do this, the **entity** column of my_data3 has tidied to exclude the entities that are non-countries.
 
 ```{r}
 #| echo: true
@@ -71,6 +77,10 @@ mean_co2_emission_by_country <- my_data3 |>
 head(mean_co2_emission_by_country)
 ```
 
+Note that to be able to see the mean carbondioxide emission of **the rest of the world**, it is combined into the observation **Other**.
+
+It's needed to see the transportation carbondioxide emission levels of countries through the years to get more information about them. Below, the amounts of some of those 20 countries' (which are chosen specifically by team NRG) mean transportation carbondioxide emission (in tons) are displayed in the graph with the tidied version of my_data3.
+
 ```{r}
 #| echo: true
 ggplot(mean_co2_emission_by_country, aes(x = reorder(entity_lumped, mean_co2_emission_per_year), y = mean_co2_emission_per_year, fill = entity_lumped)) +
@@ -85,19 +95,26 @@ ggplot(mean_co2_emission_by_country, aes(x = reorder(entity_lumped, mean_co2_emi
   theme(legend.position = "none")
 ```
 
-The big majority of mean transportation carbondioxide emissions consisted of top 20 countries.
+**Conclusion:**
 
-Scandinavia countries, such as Denmark and Norway, are really worth to analyze their transportation carbondioxide emissions and electric/non-electric EV sales, as they have not listed in the top 20 countries with the largest mean carbondioxide emission level.
+-   **The big majority** of mean transportation carbondioxide emissions consisted of top 20 countries.
 
-Turkey is 19th country with the largest mean transportation carbondioxide emission level.
+-   **Turkey** is **19th country** with the largest mean transportation carbondioxide emission level.
 
-It's needed to see the transportation carbondioxide emission levels of countries through the years to get more information about them. Below, the amounts of some of those 20 countries' (which are chosen specifically by team NRG) transportation carbondioxide emission (in tons) are displayed in the graph with the tidied version of my_data3.
-
-**emission_by_country:** This is the more tidied version of my_data3. 
+After this plot, the group has chosen specific countries to explore their behaviour over time. **United States and China** has chosen for being in first two place in the mean carbondioxide emission standings, **Norway and Denmark** for not being in top 20 countries list, and even they have been successful at decreasing their emission, **Turkey and Japan** to investigate the important parameters that carbondioxide emission is dependent.
 
 ```{r}
+top6_countries <- c("United States", "Norway", "Denmark", "China", "Japan", "Turkey")
+
+emission_by_country <- my_data3 |>
+  filter(entity %in% top6_countries)
+
 head(emission_by_country)
 ```
+
+Here, **emission_by_country** is the more tidied version of my_data3 in which the interested countries' carbondioxide emission is analyzed.
+
+The line plot below visualizes how much tons of carbondioxide did each selected country emit:
 
 ```{r}
 #| echo: true
@@ -119,25 +136,16 @@ ggplot(emission_by_country, aes(x = year, y = transport_co2_emissions, color = e
   theme(legend.position = "none",
         axis.text.x = element_text(angle = 90, hjust = 1)) # rotate x-axis labels
 ```
-  Here are some observations from this graph:
 
-1.  It can be observed that there is a persistent increase in the carbondioxide emission levels in Turkey and China. China is very close to emit one billion tons of carbondioxide.
+Here are some observations from this graph:
 
-2.  Denmark has decreased its carbondioxide emission level after a 10-year horizon. Japan and Norway has a considerable decreasing trend in its carbondioxide emission level.
+1.  It can be observed that there is a persistent increase in the carbondioxide emission levels in **Turkey and China**. China is very close to emit one billion tons of carbondioxide.
 
-3.  USA has the highest carbondioxide emission compared to others, exceeding one billion tons of carbondioxide.
+2.  **Denmark** has decreased its carbondioxide emission level after a 10-year horizon. **Japan and Norway** has a considerable decreasing trend in its carbondioxide emission level.
 
-  This graph compares those 6 countries very well, but it's not possible to see the trends for each of them. Therefore, the line plot below has been made to display the trend in the transportation carbondioxide emission levels of those exactly same countries to make a comparison.
+3.  **USA** has the highest carbondioxide emission compared to others, exceeding one billion tons of carbondioxide.
 
-```{r}
-#| echo: true
-top6_countries <- c("United States", "Norway", "Denmark", "China", "Japan", "Turkey")
-
-emission_by_country <- my_data3 |>
-  filter(entity %in% top6_countries)
-
-head(emission_by_country)
-```
+This graph compares those 6 countries very well, but it's not possible to see the trends for each of them. Therefore, the line plot below has been made to display the **trend** in the transportation carbondioxide emission levels of those exactly same countries to make a comparison.
 
 ```{r}
 #| echo: true
@@ -164,32 +172,158 @@ Here are some observations from this graph:
 
 1.  It can be observed that China's, USA's and Turkey's total transportation carbondioxide emission level have an increasing trend over years while Denmark's, Norway's and Japan's have a decreasing trend.
 
-2. All of the countries have a clear reduction of total transportation carbondioxide emission level in 2020. This is the effect of COVID-19 pandemic which causes a v-shaped pattern for all countries listed.
+2.  All of the countries have a clear reduction of total transportation carbondioxide emission level **in 2020**. This is the effect of **COVID-19 pandemic** which causes a **V-shaped pattern** for all countries listed.
 
-This graphs gives a lot information about transportation carbondioxide emission levels of those countries. But is it correct to make a decision from only these graphs? May population be the reason of some countries' low/high total transportation carbondioxide emission levels? Let's analyse it with the graph seen below.
+This graphs gives a lot of information about transportation carbondioxide emission levels of those countries. But is it correct to make a decision just by looking at these graphs only? May population be the reason of some countries' low/high total transportation carbondioxide emission levels? Let's analyze it.
 
-BURAYA GELECEK TOLKAN YAPTIGIN GRAPH
+# ANALYSIS OF THE POPULATION DATA ALONG WITH CO2 EMISSIONS (my_data3 and my_data8)
+
+## The Effect of Population on Transport CO2 Emissions
+
+```{r}
+str(my_data8)
+```
+
+EXPLANATION ?
+
+```{r}
+countries_selected <- c("United States", "Norway", "Denmark", "China", "Japan", "Turkey")
+
+pop_n_co2 <- my_data3 |>
+  full_join(my_data8, by = c("entity" = "entity", "year" = "year")) |>
+  replace_na(list(transport_co2_emissions = 0, population = 0))
+head(pop_n_co2)
+```
+
+Here, two data frames has been joined to include carbondioxide emissions and population columns in one data frame and replace the NA values to zero.
+
+```{r}
+pop_n_co2 <- pop_n_co2 |>
+  mutate(prop = transport_co2_emissions / population) |>
+  filter(entity %in% countries_selected)
+head(pop_n_co2)
+```
+
+After that, the data has filtered by selected countries.
+
+The line plot below visualizes the selected countries' carbondioxide emission by person on the average over time:
+
+```{r}
+ggplot(pop_n_co2, aes(x = year, y = prop, color = entity)) +
+  geom_line(size = 1) +
+  scale_x_continuous(breaks = 2011:2021) +
+  labs(x = "Year",
+       y = "CO2 Emission (in tons) / Population",
+       title = "CO2 Emission by Person",
+       subtitle = "Describes how much carbondioxide emission does a person emits on the average
+(in tons)",
+       color = "Entity")
+```
 
 Here are some observations from this graph:
 
-1.  When we analyse the transportation carbon emission per person, even China has the one of the highest total transportation carbondioxide emission, it can be seen that China has the lowest transportation carbondioxide emission per person among all other countries. While USA on the other hand, still has the highest level.
+1.  When we analyze the transportation carbon emission by person, even China has the one of the highest total transportation carbondioxide emission, it can be seen that **China** has the lowest transportation carbondioxide emission per person among all other countries. While **USA** on the other hand, still has the highest level.
 
-2. Denmark's, Norway's and Japan's transportation carbon emission per person have a decreasing trend. 
+2.  **Denmark's, Norway's and Japan's** transportation carbon emission by person have a **decreasing** trend.
 
-3. Turkey's transportation carbon emission per person is not high but it has an increasing trend.
+3.  **Turkey's** transportation carbon emission per person is **not high** but it has an **increasing** trend.
 
-4. The decrease in 2020 can be seen again.
+4.  The decrease **in 2020** can be seen again.
+
+What about the effect of income levels on transport carbondioxide emission? Let's analyze this too.
+
+## Income Based Mean Emission
+
+**my_data3** has some columns which represent the countries based on their income levels. Therefore, here is the visualization of how the total carbondioxide emissions has changed by countries' income level.
+
+```{r}
+#| echo: true
+countries_by_income <- c(
+  "Upper-middle-income countries", 
+  "Lower-middle-income countries", 
+  "Low-income countries", 
+  "High-income countries"
+)
+
+total_co2_emission_by_income <- my_data3 |> 
+  filter(entity %in% countries_by_income) |>
+  rename(income_class = entity) |>
+  group_by(income_class) |>
+  summarize(total_co2_income = sum(transport_co2_emissions, na.rm = TRUE))
+
+head(total_co2_emission_by_income)
+```
+
+The column name entity has been changed with income_class.
+
+```{r}
+#| echo: true
+ggplot(total_co2_emission_by_income, aes(x = reorder(income_class, total_co2_income), y = total_co2_income, fill = income_class)) +
+  geom_col() +
+  scale_y_continuous(labels = label_number(scale = 1, accuracy = 1)) +
+  coord_flip() +
+  labs(x = "Income Class",
+       y = "Total CO2 Emission",
+       title = "Total CO2 Emission by Income Class",
+       subtitle = "From 2011 to 2021 (in tons)") +
+  theme_light() +
+  theme(legend.position = "none")
+```
+
+The more income, the more carbondioxide that a country emits.
+
+It is reasonable to explore the carbondioxide emissions by income level over the years.
+
+```{r}
+countries_selected <- c("United States", "Norway", "Denmark", "China", "Japan", "Turkey")
+
+countries_by_income <- c(
+  "Upper-middle-income countries", 
+  "Lower-middle-income countries", 
+  "Low-income countries", 
+  "High-income countries"
+)
+
+co2_by_income <- my_data3 |> 
+  filter(entity %in% countries_by_income) |>
+  rename(income_class = entity) |>
+  group_by(income_class) |>
+  select(-code)
+head(co2_by_income)
+```
+
+The line plot can be seen below.
+
+```{r}
+ggplot(co2_by_income, aes(x = year, y = transport_co2_emissions, color = income_class)) +
+  geom_line(size = 1) +
+  scale_x_continuous(breaks = 2011:2021) +
+  scale_y_continuous(
+    trans = "log10",
+    breaks = c(1000000, 10000000, 100000000, 1000000000, 2000000000, 3000000000, 4000000000),
+    labels = c("1M", "10M", "100M", "1B", "2B", "3B", "4B")
+  ) +
+  labs(x = "Year",
+       y = "CO2 Emission (in tons)",
+       title = "Carbondioxide Emissions by Income Level",
+       subtitle = "From 2011 to 2021",
+       color = "Income Class") +
+  theme_light()
+```
+
+The proportionality explained above can be still adopted.
 
 # Global EV Sales (my_data2)
 
 ```{r}
 str(my_data2)
 ```
+
 **region:** A character column in my_data2 data set which represents the countries and the world.
 
 **category:** A character column in my_data2 data set which represents how the data has collected.
 
-**parameter:**  A character column in my_data2 data set which represents the parameter of the data collected.
+**parameter:** A character column in my_data2 data set which represents the parameter of the data collected.
 
 **mode:** A character column in my_data2 data set which represents the vehicle types.
 
@@ -201,10 +335,9 @@ str(my_data2)
 
 **value:** A numeric column in my_data2 data set which represents the amount of the vehicles in unit.
 
+## Sales of No Carbon Vehicles
 
-##Sales of No Carbon Vehicles 
-
-What about the countries' adoption on EV's? To be able to understand the relation between EV sales and transportation, my_data2 is used. The same countries are filtered from it.
+What about the countries' adoption on EV's? To be able to understand the relationship between EV sales and transportation, my_data2 is used. The same countries are filtered from it.
 
 The types of EV's are summarized below.
 
@@ -214,7 +347,7 @@ The types of EV's are summarized below.
 -   Hybrid Electric Vehicle (HEV)
 -   Mild Hybrid Vehicle (MHEV)
 
-BEV and FCEV sales are analysed since they're the no carbon ones.
+**BEV and FCEV** sales are analysed since they're the no carbon ones.
 
 ```{r}
 #| echo: true
@@ -229,6 +362,8 @@ top6_ev_sales |> mutate(value = as.numeric(format(value, scientific = FALSE)))
 
 head(top6_ev_sales)
 ```
+
+The line plot below visualizes how the EV Sales of Non-Carbon Vehicles has evolved over the 10-year horizon:
 
 ```{r}
 #| echo: true
@@ -255,13 +390,66 @@ top6_ev_sales |> group_by(year, region, powertrain) |>
 top6_ev_sales
 ```
 
-Here are some observations from this graph and the graphs before:
+Here are some observations from this graph:
 
-1. All countries in the plot increased their non-carbon emitting vehicle sales after 10-year horizon. However, Turkey has not been adopted FCEV's through 2021 while the other countries are using FCEV's more year by year. China has started using FCEV's (in 2016) later than the others (in 2011-2014). It can be also observed that BEV sales has started 2012 in Turkey.
+1.  All countries in the plot increased their non-carbon emitting vehicle sales after 10-year horizon. However, **Turkey** has not been adopted **FCEV's through 2021** yet, while the other countries are using **FCEV's** more year by year. **China** has started using **FCEV's** (in 2016) **later** than the others (in 2011-2014). It can be also observed that **BEV** sales has started **2012 in Turkey**.
 
-2. China has increased its BEV and FCEV sales more than any other country, however from the last analyses we know that it couldn't make any big difference in total transportation carbondioxide emission since it's population is too high. On the other hand in Norway and Denmark, BEVs and FCEVs has a positive effect on total transportation carbondioxide emission since their populations are much lower than China.
+2.  **China** has increased its **BEV** and **FCEV** sales more than any other country, however from the last analyses we know that it couldn't make any big difference in total transportation carbondioxide emission since it's population is too high. On the other hand, **in Norway and Denmark**, **BEV's** and **FCEV's** has a **positive** effect on total transportation carbondioxide emission since their populations are much lower than **China**.
 
-3. It seems like Japan didn't increase the sales of BEVs and FCEVs, yet they managed to decrease the total transportation carbondioxide emission, which means they did some other applications.
+3.  It can be seen that **Japan** didn't increase the sales of **BEV's**. Yet, they managed to decrease the total transportation carbondioxide emission by increasing the **FCEV** sales considerably, which means they have done some other applications.
+
+## Exploring the Relationship Between CO2 Emission and Total EV Sales (my_data2 and my_data3)
+
+So, how carbondioxide emission has been affected by total EV sales?
+
+For this part of analysis, **my_data2** and **my_data3** will be used. The selected countries will be analyzed again.
+
+```{r}
+countries_selected <- c("United States", "Norway", "Denmark", "China", "Japan", "Turkey")
+
+my_data2$region[my_data2$region == "USA"] <- "United States"
+
+my_data2_selected <- my_data2 |>
+  filter(region %in% countries_selected, parameter == "EV sales") |>
+  group_by(region, year) |>
+  summarize(total_ev_sales = sum(value), .groups = "keep")
+
+my_data3_selected <- my_data3 |>
+  filter(entity %in% countries_selected) |>
+  select(-code)
+
+my_data2_3_selected <- my_data2_selected |>
+  full_join(my_data3_selected, by = c("region" = "entity", "year" = "year")) |>
+  replace_na(list(total_ev_sales = 0, transport_co2_emissions = 0))
+head(my_data2_3_selected)
+```
+
+Join operation is used again. NA values stems from joining operation has been set to zero.
+
+However, one of the selected countries has named differently, which is USA. To avoid this, **USA** in my_data2 has been changed to **United States**.
+
+Now, the total EV sales and transport CO2 emissions can be seen in one tibble.
+
+The scatter plot below visualizes the behaviour including trend lines connecting these points in each selected country.
+
+```{r}
+ggplot(my_data2_3_selected, aes(x = total_ev_sales, y = transport_co2_emissions, color = region)) +
+  geom_point(size = 2) +
+  geom_smooth(method = "lm", se = FALSE, linetype = "dashed", size = 0.8, alpha = 0.5) +
+  scale_x_continuous(trans = "log10",
+                     labels = label_number(scale = 1, accuracy = 1)) +
+  scale_y_continuous(trans = "log10",
+                     labels = label_number(scale = 1, accuracy = 1)) +
+  labs(x = "Total EV Sales",
+       y = "CO2 Emission (in tons)",
+       title = "Scatter Plot of CO2 Emission vs. Total EV Sales",
+       subtitle = "The correlation between total EV sales and carbondioxide emissions for
+each selected region",
+       color = "Region") +
+  theme_light()
+```
+
+The correlation between total sales and carbondioxide emission is **not always** positive. **Half of the countries** has succeeded to decrease their carbondioxide emissions despite their increase in the **total EV sales**.
 
 # Turkey's Status (my_data4)
 
@@ -300,9 +488,11 @@ str(my_data4)
 
 **percentage_unknown:** A character column which represents the number of vehicles that are unknown over total number of vehicles.
 
-## Vehicle Trends
+## Vehicle Trends in Turkey
 
-How about the adoption of EVs and the others in Turkey? In this part of analysing, my_data4 will be using.
+How about the adoption of **EV's** and **the others** **in Turkey?**
+
+**my_data4** will be used for this part of analysis.
 
 ```{r}
 #| echo: true
@@ -320,7 +510,9 @@ tr_vehicle_num_long <- tr_vehicle_num |>
 head(tr_vehicle_num_long)
 ```
 
-These are provided in the line plot below.
+Here, the percentage column is deleted, and all other columns of vehicle types and their values have been brought into columns named **vehicle_type** and **value** by using **pivot_longer()** function.
+
+In order to visualize the vehicles trend in Turkey, the following code is used:
 
 ```{r}
 #| echo: false
@@ -341,12 +533,11 @@ ggplot(tr_vehicle_num_long, aes(x = year, y = value, color = vehicle_type)) +
   )
 ```
 
-Although there was an increase in EV's and hybrid vehicles, Turkey's total transportation carbondioxide emission has increased consistently (information from Country Based Mean Transportation CO2 Emission part) and the effect of COVID-19 pandemic was quite temporary on it.
+Although there was an **increase** in **EV's** and **hybrid** vehicles, **Turkey's** total transportation carbondioxide emission has increased **consistently** (information from Country Based Mean Transportation CO2 Emission section) and the effect of COVID-19 pandemic was quite **temporary** on it.
 
-The cumulative bar plot below displays the proportion of vehicle types over time.
+The behaviour of the number of vehicles is known now. However, an important question is, have these increases in the number of **EV** and **hybrid** vehicles been considerable on a proportional view?
 
 ```{r}
-#| echo: true
 vehicle_prop <- c("percentage_gas", "percentage_diesel", "percentage_lpg", "percentage_hybrid", "percentage_electric", "percentage_unknown")
 
 tr_vehicle_perc_long <- my_data4 |>
@@ -357,6 +548,10 @@ tr_vehicle_perc_long$percentage <- as.numeric(tr_vehicle_perc_long$percentage)
 
 head(tr_vehicle_perc_long)
 ```
+
+This time, columns including percentages and their values have been selected brought into columns named **vehicle_type** and **percentage**, respectively, by using **pivot_longer()** function.
+
+The cumulative bar plot below displays the proportion of vehicle types over time.
 
 ```{r}
 #| echo: true
@@ -371,11 +566,11 @@ ggplot(tr_vehicle_perc_long, aes(x = year, y = percentage, fill = vehicle_type))
   theme_tufte()
 ```
 
-In fact, non-EV's were still used widely in Turkey, leading to increasing carbondioxide emission levels.
+In fact, **non-EV's** were still used widely **in Turkey**, leading to be the one of the reason of increase in carbondioxide emission levels.
 
-## Mean Transportation Emission
+## Mean Transportation Emission (my_data3 and my_data8)
 
-Turkey's average transportation carbondioxide emission per vehicle is displayed in the line plot below.
+**Turkey's** average transportation carbondioxide emission per vehicle is displayed in the line plot below.
 
 ```{r}
 #| echo: true
@@ -396,6 +591,8 @@ tr_emission_n_vehicle$year <- as.numeric(tr_emission_n_vehicle$year)
 head(tr_emission_n_vehicle)
 ```
 
+Here, **my_data3** and **my_data8** have been joined to be able to display Turkey's average transport carbondioxide emission per vehicle.
+
 ```{r}
 #| echo: true
 tr_avg_emission <- tr_emission_n_vehicle |>
@@ -414,41 +611,3 @@ tr_avg_emission <- tr_emission_n_vehicle |>
 
 tr_avg_emission
 ```
-
-# Income Based Mean Emission (An addition part, my_data3)
-
-my_data3 has some columns which represents the countries according to their income levels. Therefore, here is the visualization of how the mean carbondioxide emissions has changed by countries' income level. (Buraya lineplot yapilacak degisiklikler olacak ve eklenen seylerin aciklamalari yazilacak.)
-
-```{r}
-#| echo: true
-countries_by_income <- c(
-  "Upper-middle-income countries", 
-  "Lower-middle-income countries", 
-  "Low-income countries", 
-  "High-income countries"
-)
-
-total_co2_emission_by_income <- my_data3 |> 
-  filter(entity %in% countries_by_income) |>
-  rename(income_class = entity) |>
-  group_by(income_class) |>
-  summarize(total_co2_income = sum(transport_co2_emissions, na.rm = TRUE))
-
-total_co2_emission_by_income
-```
-
-```{r}
-#| echo: true
-ggplot(total_co2_emission_by_income, aes(x = reorder(income_class, total_co2_income), y = total_co2_income, fill = income_class)) +
-  geom_col() +
-  scale_y_continuous(labels = label_number(scale = 1, accuracy = 1)) +
-  coord_flip() +
-  labs(x = "Income Class",
-       y = "Total CO2 Emission",
-       title = "Total CO2 Emission by Income Class",
-       subtitle = "From 2011 to 2021 (in tons)") +
-  theme_light() +
-  theme(legend.position = "none")
-```
-
-As expected, the more income levels, the high emission levels that a country would have.

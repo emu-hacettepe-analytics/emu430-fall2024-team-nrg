@@ -151,7 +151,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#library-preparation" id="toc-library-preparation" class="nav-link active" data-scroll-target="#library-preparation">Library Preparation</a></li>
-  <li><a href="#analaysis-with-co2-emission-from-transport-data-my_data3" id="toc-analaysis-with-co2-emission-from-transport-data-my_data3" class="nav-link" data-scroll-target="#analaysis-with-co2-emission-from-transport-data-my_data3">ANALAYSIS WITH CO2 EMISSION FROM TRANSPORT DATA (my_data3)</a>
+  <li><a href="#analysis-of-co2-emission-from-transport-data-my_data3" id="toc-analysis-of-co2-emission-from-transport-data-my_data3" class="nav-link" data-scroll-target="#analysis-of-co2-emission-from-transport-data-my_data3">ANALYSIS OF CO2 EMISSION FROM TRANSPORT DATA (my_data3)</a>
   <ul class="collapse">
   <li><a href="#country-based-mean-transportation-co2-emission" id="toc-country-based-mean-transportation-co2-emission" class="nav-link" data-scroll-target="#country-based-mean-transportation-co2-emission">Country Based Mean Transportation CO2 Emission</a></li>
   </ul></li>
@@ -174,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Analysis</h1>
+<div class="quarto-title-block"><div><h1 class="title">Analysis</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -207,9 +207,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="analaysis-with-co2-emission-from-transport-data-my_data3" class="level1">
-<h1>ANALAYSIS WITH CO2 EMISSION FROM TRANSPORT DATA (my_data3)</h1>
-<p>In this part of analysing, my_data3 will be using. Therefore, here is the general information that’s needed:</p>
+<section id="analysis-of-co2-emission-from-transport-data-my_data3" class="level1">
+<h1>ANALYSIS OF CO2 EMISSION FROM TRANSPORT DATA (my_data3)</h1>
+<p>my_data3 will be used for this part of analysis. Therefore, here is the general information that’s needed:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -224,12 +224,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><strong>entity:</strong> A character column in my_data3 data set which represents the countries, continents, some income levels and the world.</p>
-<p><strong>code:</strong> A character column in my_data3 data set which represents the codes of the countries. (There are no codes for noncountries)</p>
+<p><strong>code:</strong> A character column in my_data3 data set which represents the codes of the countries. (There are no codes for non-countries)</p>
 <p><strong>year:</strong> An integer column in my_data3 data set which represents the year.</p>
 <p><strong>transport_co2_emissions:</strong> A numeric column in my_data3 data set which represents the total carbon emission in ton.</p>
 <section id="country-based-mean-transportation-co2-emission" class="level2">
 <h2 class="anchored" data-anchor-id="country-based-mean-transportation-co2-emission">Country Based Mean Transportation CO2 Emission</h2>
-<p>Final look at the top 20 countries’ mean transportation carbondioxide emission from 2011 to 2021. To do this, entity column of my_data3 has tidied.</p>
+<p>Let’s take a look at the top 20 countries’ mean transportation carbondioxide emission from 2011 to 2021. To do this, the <strong>entity</strong> column of my_data3 has tidied to exclude the entities that are non-countries.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -831,6 +831,8 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 <p>As expected, the more income levels, the high emission levels that a country would have.</p>
 
 
+<!-- -->
+
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -923,6 +925,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
     clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
@@ -1253,7 +1306,469 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb38" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Analysis"</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="fu"># Library Preparation</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r load-workspace}</span></span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a><span class="in">#| include: false</span></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a><span class="in">load("emu430_project_workspace.RData")</span></span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a><span class="fu"># ANALYSIS OF CO2 EMISSION FROM TRANSPORT DATA (my_data3)</span></span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>my_data3 will be used for this part of analysis. Therefore, here is the general information that's needed:</span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(my_data3)</span>
+<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a>**entity:** A character column in my_data3 data set which represents the countries, continents, some income levels and the world.</span>
+<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a>**code:** A character column in my_data3 data set which represents the codes of the countries. (There are no codes for non-countries)</span>
+<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a>**year:** An integer column in my_data3 data set which represents the year.</span>
+<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-49"><a href="#cb38-49" aria-hidden="true" tabindex="-1"></a>**transport_co2_emissions:** A numeric column in my_data3 data set which represents the total carbon emission in ton.</span>
+<span id="cb38-50"><a href="#cb38-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-51"><a href="#cb38-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## Country Based Mean Transportation CO2 Emission</span></span>
+<span id="cb38-52"><a href="#cb38-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-53"><a href="#cb38-53" aria-hidden="true" tabindex="-1"></a>Let's take a look at the top 20 countries' mean transportation carbondioxide emission from 2011 to 2021. To do this, the **entity** column of my_data3 has tidied to exclude the entities that are non-countries.</span>
+<span id="cb38-54"><a href="#cb38-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-57"><a href="#cb38-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-58"><a href="#cb38-58" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-59"><a href="#cb38-59" aria-hidden="true" tabindex="-1"></a>non_countries <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb38-60"><a href="#cb38-60" aria-hidden="true" tabindex="-1"></a>  <span class="st">"World"</span>, </span>
+<span id="cb38-61"><a href="#cb38-61" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Upper-middle-income countries"</span>, </span>
+<span id="cb38-62"><a href="#cb38-62" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Lower-middle-income countries"</span>, </span>
+<span id="cb38-63"><a href="#cb38-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Low-income countries"</span>, </span>
+<span id="cb38-64"><a href="#cb38-64" aria-hidden="true" tabindex="-1"></a>  <span class="st">"High-income countries"</span>, </span>
+<span id="cb38-65"><a href="#cb38-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"European Union (27)"</span>, </span>
+<span id="cb38-66"><a href="#cb38-66" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Europe"</span>, </span>
+<span id="cb38-67"><a href="#cb38-67" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Asia"</span>, </span>
+<span id="cb38-68"><a href="#cb38-68" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Africa"</span>,</span>
+<span id="cb38-69"><a href="#cb38-69" aria-hidden="true" tabindex="-1"></a>  <span class="st">"North America"</span>,</span>
+<span id="cb38-70"><a href="#cb38-70" aria-hidden="true" tabindex="-1"></a>  <span class="st">"South America"</span>,</span>
+<span id="cb38-71"><a href="#cb38-71" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Oceania"</span></span>
+<span id="cb38-72"><a href="#cb38-72" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-73"><a href="#cb38-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-74"><a href="#cb38-74" aria-hidden="true" tabindex="-1"></a>mean_co2_emission_by_country <span class="ot">&lt;-</span> my_data3 <span class="sc">|&gt;</span> </span>
+<span id="cb38-75"><a href="#cb38-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>entity <span class="sc">%in%</span> non_countries) <span class="sc">|&gt;</span></span>
+<span id="cb38-76"><a href="#cb38-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(entity) <span class="sc">|&gt;</span></span>
+<span id="cb38-77"><a href="#cb38-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_co2_emission_per_year =</span> <span class="fu">mean</span>(transport_co2_emissions, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb38-78"><a href="#cb38-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">entity_lumped =</span> <span class="fu">fct_lump_n</span>(entity, <span class="at">n =</span> <span class="dv">20</span>, <span class="at">w =</span> mean_co2_emission_per_year)) <span class="sc">|&gt;</span></span>
+<span id="cb38-79"><a href="#cb38-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(entity_lumped) <span class="sc">|&gt;</span></span>
+<span id="cb38-80"><a href="#cb38-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_co2_emission_per_year =</span> <span class="fu">mean</span>(mean_co2_emission_per_year, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb38-81"><a href="#cb38-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-82"><a href="#cb38-82" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mean_co2_emission_by_country)</span>
+<span id="cb38-83"><a href="#cb38-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-84"><a href="#cb38-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-87"><a href="#cb38-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-88"><a href="#cb38-88" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-89"><a href="#cb38-89" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_co2_emission_by_country, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(entity_lumped, mean_co2_emission_per_year), <span class="at">y =</span> mean_co2_emission_per_year, <span class="at">fill =</span> entity_lumped)) <span class="sc">+</span></span>
+<span id="cb38-90"><a href="#cb38-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb38-91"><a href="#cb38-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale =</span> <span class="dv">1</span>, <span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb38-92"><a href="#cb38-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb38-93"><a href="#cb38-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>,</span>
+<span id="cb38-94"><a href="#cb38-94" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Mean CO2 Emission"</span>,</span>
+<span id="cb38-95"><a href="#cb38-95" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Mean CO2 Emission by Country"</span>,</span>
+<span id="cb38-96"><a href="#cb38-96" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"From 2011 to 2021 (in tons)"</span>) <span class="sc">+</span></span>
+<span id="cb38-97"><a href="#cb38-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb38-98"><a href="#cb38-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb38-99"><a href="#cb38-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-100"><a href="#cb38-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-101"><a href="#cb38-101" aria-hidden="true" tabindex="-1"></a>The big majority of mean transportation carbondioxide emissions consisted of top 20 countries.</span>
+<span id="cb38-102"><a href="#cb38-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-103"><a href="#cb38-103" aria-hidden="true" tabindex="-1"></a>Scandinavia countries, such as Denmark and Norway, are really worth to analyze their transportation carbondioxide emissions and electric/non-electric EV sales, as they have not listed in the top 20 countries with the largest mean carbondioxide emission level.</span>
+<span id="cb38-104"><a href="#cb38-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-105"><a href="#cb38-105" aria-hidden="true" tabindex="-1"></a>Turkey is 19th country with the largest mean transportation carbondioxide emission level.</span>
+<span id="cb38-106"><a href="#cb38-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-107"><a href="#cb38-107" aria-hidden="true" tabindex="-1"></a>It's needed to see the transportation carbondioxide emission levels of countries through the years to get more information about them. Below, the amounts of some of those 20 countries' (which are chosen specifically by team NRG) transportation carbondioxide emission (in tons) are displayed in the graph with the tidied version of my_data3.</span>
+<span id="cb38-108"><a href="#cb38-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-109"><a href="#cb38-109" aria-hidden="true" tabindex="-1"></a>**emission_by_country:** This is the more tidied version of my_data3.</span>
+<span id="cb38-110"><a href="#cb38-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-113"><a href="#cb38-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-114"><a href="#cb38-114" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(emission_by_country)</span>
+<span id="cb38-115"><a href="#cb38-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-116"><a href="#cb38-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-119"><a href="#cb38-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-120"><a href="#cb38-120" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-121"><a href="#cb38-121" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(emission_by_country, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> transport_co2_emissions, <span class="at">color =</span> entity)) <span class="sc">+</span></span>
+<span id="cb38-122"><a href="#cb38-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb38-123"><a href="#cb38-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb38-124"><a href="#cb38-124" aria-hidden="true" tabindex="-1"></a>    <span class="at">trans =</span> <span class="st">"log10"</span>,</span>
+<span id="cb38-125"><a href="#cb38-125" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>, <span class="dv">1000000</span>, <span class="dv">10000000</span>, <span class="dv">100000000</span>, <span class="dv">1000000000</span>, <span class="dv">10000000000</span>),</span>
+<span id="cb38-126"><a href="#cb38-126" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"10"</span>, <span class="st">"100"</span>, <span class="st">"1K"</span>, <span class="st">"10K"</span>, <span class="st">"100K"</span>, <span class="st">"1M"</span>, <span class="st">"10M"</span>, <span class="st">"100M"</span>, <span class="st">"1B"</span>, <span class="st">"10B"</span>)</span>
+<span id="cb38-127"><a href="#cb38-127" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb38-128"><a href="#cb38-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2011</span><span class="sc">:</span><span class="dv">2021</span>) <span class="sc">+</span></span>
+<span id="cb38-129"><a href="#cb38-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> entity) <span class="sc">+</span></span>
+<span id="cb38-130"><a href="#cb38-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>, </span>
+<span id="cb38-131"><a href="#cb38-131" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"CO2 Emission"</span>,</span>
+<span id="cb38-132"><a href="#cb38-132" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Carbondioxide Emissions by Entity (Logarithmic Scale)"</span>,</span>
+<span id="cb38-133"><a href="#cb38-133" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"From 2011 to 2021 (in tons)"</span></span>
+<span id="cb38-134"><a href="#cb38-134" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb38-135"><a href="#cb38-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb38-136"><a href="#cb38-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb38-137"><a href="#cb38-137" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="co"># rotate x-axis labels</span></span>
+<span id="cb38-138"><a href="#cb38-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-139"><a href="#cb38-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-140"><a href="#cb38-140" aria-hidden="true" tabindex="-1"></a>Here are some observations from this graph:</span>
+<span id="cb38-141"><a href="#cb38-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-142"><a href="#cb38-142" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>It can be observed that there is a persistent increase in the carbondioxide emission levels in Turkey and China. China is very close to emit one billion tons of carbondioxide.</span>
+<span id="cb38-143"><a href="#cb38-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-144"><a href="#cb38-144" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Denmark has decreased its carbondioxide emission level after a 10-year horizon. Japan and Norway has a considerable decreasing trend in its carbondioxide emission level.</span>
+<span id="cb38-145"><a href="#cb38-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-146"><a href="#cb38-146" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>USA has the highest carbondioxide emission compared to others, exceeding one billion tons of carbondioxide.</span>
+<span id="cb38-147"><a href="#cb38-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-148"><a href="#cb38-148" aria-hidden="true" tabindex="-1"></a>This graph compares those 6 countries very well, but it's not possible to see the trends for each of them. Therefore, the line plot below has been made to display the trend in the transportation carbondioxide emission levels of those exactly same countries to make a comparison.</span>
+<span id="cb38-149"><a href="#cb38-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-152"><a href="#cb38-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-153"><a href="#cb38-153" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-154"><a href="#cb38-154" aria-hidden="true" tabindex="-1"></a>top6_countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"United States"</span>, <span class="st">"Norway"</span>, <span class="st">"Denmark"</span>, <span class="st">"China"</span>, <span class="st">"Japan"</span>, <span class="st">"Turkey"</span>)</span>
+<span id="cb38-155"><a href="#cb38-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-156"><a href="#cb38-156" aria-hidden="true" tabindex="-1"></a>emission_by_country <span class="ot">&lt;-</span> my_data3 <span class="sc">|&gt;</span></span>
+<span id="cb38-157"><a href="#cb38-157" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(entity <span class="sc">%in%</span> top6_countries)</span>
+<span id="cb38-158"><a href="#cb38-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-159"><a href="#cb38-159" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(emission_by_country)</span>
+<span id="cb38-160"><a href="#cb38-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-161"><a href="#cb38-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-164"><a href="#cb38-164" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-165"><a href="#cb38-165" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-166"><a href="#cb38-166" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(emission_by_country, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> transport_co2_emissions, <span class="at">color =</span> entity)) <span class="sc">+</span></span>
+<span id="cb38-167"><a href="#cb38-167" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb38-168"><a href="#cb38-168" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb38-169"><a href="#cb38-169" aria-hidden="true" tabindex="-1"></a>    <span class="at">trans =</span> <span class="st">"log10"</span>,</span>
+<span id="cb38-170"><a href="#cb38-170" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>, <span class="dv">1000000</span>, <span class="dv">10000000</span>, <span class="dv">100000000</span>, <span class="dv">1000000000</span>, <span class="dv">10000000000</span>),</span>
+<span id="cb38-171"><a href="#cb38-171" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"10"</span>, <span class="st">"100"</span>, <span class="st">"1K"</span>, <span class="st">"10K"</span>, <span class="st">"100K"</span>, <span class="st">"1M"</span>, <span class="st">"10M"</span>, <span class="st">"100M"</span>, <span class="st">"1B"</span>, <span class="st">"10B"</span>)</span>
+<span id="cb38-172"><a href="#cb38-172" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb38-173"><a href="#cb38-173" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2011</span><span class="sc">:</span><span class="dv">2021</span>) <span class="sc">+</span></span>
+<span id="cb38-174"><a href="#cb38-174" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> entity, <span class="at">scale =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb38-175"><a href="#cb38-175" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>, </span>
+<span id="cb38-176"><a href="#cb38-176" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"CO2 Emission"</span>,</span>
+<span id="cb38-177"><a href="#cb38-177" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Carbondioxide Emissions by Entity (Logarithmic Scale)"</span>,</span>
+<span id="cb38-178"><a href="#cb38-178" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Carbondioxide emission trends from 2011 to 2021"</span></span>
+<span id="cb38-179"><a href="#cb38-179" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb38-180"><a href="#cb38-180" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb38-181"><a href="#cb38-181" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb38-182"><a href="#cb38-182" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="co"># rotate x-axis labels</span></span>
+<span id="cb38-183"><a href="#cb38-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-184"><a href="#cb38-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-185"><a href="#cb38-185" aria-hidden="true" tabindex="-1"></a>Here are some observations from this graph:</span>
+<span id="cb38-186"><a href="#cb38-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-187"><a href="#cb38-187" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>It can be observed that China's, USA's and Turkey's total transportation carbondioxide emission level have an increasing trend over years while Denmark's, Norway's and Japan's have a decreasing trend.</span>
+<span id="cb38-188"><a href="#cb38-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-189"><a href="#cb38-189" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>All of the countries have a clear reduction of total transportation carbondioxide emission level in 2020. This is the effect of COVID-19 pandemic which causes a v-shaped pattern for all countries listed.</span>
+<span id="cb38-190"><a href="#cb38-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-191"><a href="#cb38-191" aria-hidden="true" tabindex="-1"></a>This graphs gives a lot information about transportation carbondioxide emission levels of those countries. But is it correct to make a decision from only these graphs? May population be the reason of some countries' low/high total transportation carbondioxide emission levels? Let's analyse it with the graph seen below.</span>
+<span id="cb38-192"><a href="#cb38-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-193"><a href="#cb38-193" aria-hidden="true" tabindex="-1"></a>BURAYA GELECEK TOLKAN YAPTIGIN GRAPH</span>
+<span id="cb38-194"><a href="#cb38-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-195"><a href="#cb38-195" aria-hidden="true" tabindex="-1"></a>Here are some observations from this graph:</span>
+<span id="cb38-196"><a href="#cb38-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-197"><a href="#cb38-197" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>When we analyse the transportation carbon emission per person, even China has the one of the highest total transportation carbondioxide emission, it can be seen that China has the lowest transportation carbondioxide emission per person among all other countries. While USA on the other hand, still has the highest level.</span>
+<span id="cb38-198"><a href="#cb38-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-199"><a href="#cb38-199" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Denmark's, Norway's and Japan's transportation carbon emission per person have a decreasing trend.</span>
+<span id="cb38-200"><a href="#cb38-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-201"><a href="#cb38-201" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Turkey's transportation carbon emission per person is not high but it has an increasing trend.</span>
+<span id="cb38-202"><a href="#cb38-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-203"><a href="#cb38-203" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>The decrease in 2020 can be seen again.</span>
+<span id="cb38-204"><a href="#cb38-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-205"><a href="#cb38-205" aria-hidden="true" tabindex="-1"></a><span class="fu"># Global EV Sales (my_data2)</span></span>
+<span id="cb38-206"><a href="#cb38-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-209"><a href="#cb38-209" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-210"><a href="#cb38-210" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(my_data2)</span>
+<span id="cb38-211"><a href="#cb38-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-212"><a href="#cb38-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-213"><a href="#cb38-213" aria-hidden="true" tabindex="-1"></a>**region:** A character column in my_data2 data set which represents the countries and the world.</span>
+<span id="cb38-214"><a href="#cb38-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-215"><a href="#cb38-215" aria-hidden="true" tabindex="-1"></a>**category:** A character column in my_data2 data set which represents how the data has collected.</span>
+<span id="cb38-216"><a href="#cb38-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-217"><a href="#cb38-217" aria-hidden="true" tabindex="-1"></a>**parameter:** A character column in my_data2 data set which represents the parameter of the data collected.</span>
+<span id="cb38-218"><a href="#cb38-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-219"><a href="#cb38-219" aria-hidden="true" tabindex="-1"></a>**mode:** A character column in my_data2 data set which represents the vehicle types.</span>
+<span id="cb38-220"><a href="#cb38-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-221"><a href="#cb38-221" aria-hidden="true" tabindex="-1"></a>**powertrain:** A character column in my_data2 data set which represents how the vehicle gets its power from, a.k.a. type of the powertrain that the vehicle uses which are EV, BEV, PHEV etc.</span>
+<span id="cb38-222"><a href="#cb38-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-223"><a href="#cb38-223" aria-hidden="true" tabindex="-1"></a>**year:** A numeric column in my_data2 data set which represents the year.</span>
+<span id="cb38-224"><a href="#cb38-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-225"><a href="#cb38-225" aria-hidden="true" tabindex="-1"></a>**unit:** A character column in my_data2 data set which represents the unit that is used.</span>
+<span id="cb38-226"><a href="#cb38-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-227"><a href="#cb38-227" aria-hidden="true" tabindex="-1"></a>**value:** A numeric column in my_data2 data set which represents the amount of the vehicles in unit.</span>
+<span id="cb38-228"><a href="#cb38-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-229"><a href="#cb38-229" aria-hidden="true" tabindex="-1"></a>##Sales of No Carbon Vehicles</span>
+<span id="cb38-230"><a href="#cb38-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-231"><a href="#cb38-231" aria-hidden="true" tabindex="-1"></a>What about the countries' adoption on EV's? To be able to understand the relation between EV sales and transportation, my_data2 is used. The same countries are filtered from it.</span>
+<span id="cb38-232"><a href="#cb38-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-233"><a href="#cb38-233" aria-hidden="true" tabindex="-1"></a>The types of EV's are summarized below.</span>
+<span id="cb38-234"><a href="#cb38-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-235"><a href="#cb38-235" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Battery Electric Vehicle (BEV)</span>
+<span id="cb38-236"><a href="#cb38-236" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Plug-in Hybrid Electric Vehicle (PHEV)</span>
+<span id="cb38-237"><a href="#cb38-237" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Fuel Cell Electric Vehicle (FCEV)</span>
+<span id="cb38-238"><a href="#cb38-238" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Hybrid Electric Vehicle (HEV)</span>
+<span id="cb38-239"><a href="#cb38-239" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Mild Hybrid Vehicle (MHEV)</span>
+<span id="cb38-240"><a href="#cb38-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-241"><a href="#cb38-241" aria-hidden="true" tabindex="-1"></a>BEV and FCEV sales are analysed since they're the no carbon ones.</span>
+<span id="cb38-242"><a href="#cb38-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-245"><a href="#cb38-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-246"><a href="#cb38-246" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-247"><a href="#cb38-247" aria-hidden="true" tabindex="-1"></a>my_data2<span class="sc">$</span>region[my_data2<span class="sc">$</span>region <span class="sc">==</span> <span class="st">"Turkiye"</span>] <span class="ot">&lt;-</span> <span class="st">"Turkey"</span></span>
+<span id="cb38-248"><a href="#cb38-248" aria-hidden="true" tabindex="-1"></a>top6_countries <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"USA"</span>, <span class="st">"Norway"</span>, <span class="st">"Denmark"</span>, <span class="st">"China"</span>, <span class="st">"Japan"</span>, <span class="st">"Turkey"</span>)</span>
+<span id="cb38-249"><a href="#cb38-249" aria-hidden="true" tabindex="-1"></a>no_carbon <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"BEV"</span>, <span class="st">"FCEV"</span>)</span>
+<span id="cb38-250"><a href="#cb38-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-251"><a href="#cb38-251" aria-hidden="true" tabindex="-1"></a>top6_ev_sales <span class="ot">&lt;-</span> my_data2 <span class="sc">|&gt;</span></span>
+<span id="cb38-252"><a href="#cb38-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">%in%</span> top6_countries, parameter <span class="sc">==</span> <span class="st">"EV sales"</span>, powertrain <span class="sc">%in%</span> no_carbon)</span>
+<span id="cb38-253"><a href="#cb38-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-254"><a href="#cb38-254" aria-hidden="true" tabindex="-1"></a>top6_ev_sales <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">value =</span> <span class="fu">as.numeric</span>(<span class="fu">format</span>(value, <span class="at">scientific =</span> <span class="cn">FALSE</span>)))</span>
+<span id="cb38-255"><a href="#cb38-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-256"><a href="#cb38-256" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(top6_ev_sales)</span>
+<span id="cb38-257"><a href="#cb38-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-258"><a href="#cb38-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-261"><a href="#cb38-261" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-262"><a href="#cb38-262" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-263"><a href="#cb38-263" aria-hidden="true" tabindex="-1"></a>top6_ev_sales <span class="sc">|&gt;</span> <span class="fu">group_by</span>(year, region, powertrain) <span class="sc">|&gt;</span></span>
+<span id="cb38-264"><a href="#cb38-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_sales =</span> <span class="fu">sum</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-265"><a href="#cb38-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> total_sales, <span class="at">color =</span> region, <span class="at">linetype =</span> powertrain)) <span class="sc">+</span></span>
+<span id="cb38-266"><a href="#cb38-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb38-267"><a href="#cb38-267" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2011</span><span class="sc">:</span><span class="dv">2021</span>) <span class="sc">+</span></span>
+<span id="cb38-268"><a href="#cb38-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">"log10"</span>,</span>
+<span id="cb38-269"><a href="#cb38-269" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale =</span> <span class="dv">1</span>, <span class="at">accuracy =</span> <span class="dv">1</span>)</span>
+<span id="cb38-270"><a href="#cb38-270" aria-hidden="true" tabindex="-1"></a>                     ) <span class="sc">+</span></span>
+<span id="cb38-271"><a href="#cb38-271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb38-272"><a href="#cb38-272" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Sales"</span>,</span>
+<span id="cb38-273"><a href="#cb38-273" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Sales of No Carbon Vehicles (Logarithmic Scale)"</span>,</span>
+<span id="cb38-274"><a href="#cb38-274" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"The behaviour of the number of sales of vehicles that emit no carbon over time"</span>,</span>
+<span id="cb38-275"><a href="#cb38-275" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Region"</span>,</span>
+<span id="cb38-276"><a href="#cb38-276" aria-hidden="true" tabindex="-1"></a>       <span class="at">linetype =</span> <span class="st">"Powertrain Type"</span></span>
+<span id="cb38-277"><a href="#cb38-277" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb38-278"><a href="#cb38-278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> region) <span class="sc">+</span></span>
+<span id="cb38-279"><a href="#cb38-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb38-280"><a href="#cb38-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> <span class="co"># rotate x-axis labels</span></span>
+<span id="cb38-281"><a href="#cb38-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="st">"none"</span>) <span class="co"># remove the region legend</span></span>
+<span id="cb38-282"><a href="#cb38-282" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-283"><a href="#cb38-283" aria-hidden="true" tabindex="-1"></a>top6_ev_sales</span>
+<span id="cb38-284"><a href="#cb38-284" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-285"><a href="#cb38-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-286"><a href="#cb38-286" aria-hidden="true" tabindex="-1"></a>Here are some observations from this graph and the graphs before:</span>
+<span id="cb38-287"><a href="#cb38-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-288"><a href="#cb38-288" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>All countries in the plot increased their non-carbon emitting vehicle sales after 10-year horizon. However, Turkey has not been adopted FCEV's through 2021 while the other countries are using FCEV's more year by year. China has started using FCEV's (in 2016) later than the others (in 2011-2014). It can be also observed that BEV sales has started 2012 in Turkey.</span>
+<span id="cb38-289"><a href="#cb38-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-290"><a href="#cb38-290" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>China has increased its BEV and FCEV sales more than any other country, however from the last analyses we know that it couldn't make any big difference in total transportation carbondioxide emission since it's population is too high. On the other hand in Norway and Denmark, BEVs and FCEVs has a positive effect on total transportation carbondioxide emission since their populations are much lower than China.</span>
+<span id="cb38-291"><a href="#cb38-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-292"><a href="#cb38-292" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>It seems like Japan didn't increase the sales of BEVs and FCEVs, yet they managed to decrease the total transportation carbondioxide emission, which means they did some other applications.</span>
+<span id="cb38-293"><a href="#cb38-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-294"><a href="#cb38-294" aria-hidden="true" tabindex="-1"></a><span class="fu"># Turkey's Status (my_data4)</span></span>
+<span id="cb38-295"><a href="#cb38-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-298"><a href="#cb38-298" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-299"><a href="#cb38-299" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-300"><a href="#cb38-300" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(my_data4)</span>
+<span id="cb38-301"><a href="#cb38-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-302"><a href="#cb38-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-303"><a href="#cb38-303" aria-hidden="true" tabindex="-1"></a>**year:** A character column in my_data4 data set which represents the year.</span>
+<span id="cb38-304"><a href="#cb38-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-305"><a href="#cb38-305" aria-hidden="true" tabindex="-1"></a>**total:** A character column in my_data4 data set which represents the total number of vehicles that are on traffic.</span>
+<span id="cb38-306"><a href="#cb38-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-307"><a href="#cb38-307" aria-hidden="true" tabindex="-1"></a>**percentage_total:** A character column which represents the total number of vehicles over total number of vehicles.</span>
+<span id="cb38-308"><a href="#cb38-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-309"><a href="#cb38-309" aria-hidden="true" tabindex="-1"></a>**gas:** A column in my_data4 data set which represents the vehicles which operates with gas.</span>
+<span id="cb38-310"><a href="#cb38-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-311"><a href="#cb38-311" aria-hidden="true" tabindex="-1"></a>**percentage_gas:** A character column which represents the number of vehicles that uses gas over total number of vehicles.</span>
+<span id="cb38-312"><a href="#cb38-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-313"><a href="#cb38-313" aria-hidden="true" tabindex="-1"></a>**diesel:** A column in my_data4 data set which represents the vehicles which operates with diesel.</span>
+<span id="cb38-314"><a href="#cb38-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-315"><a href="#cb38-315" aria-hidden="true" tabindex="-1"></a>**percentage_diesel:** A character column which represents the number of vehicles that are diesel over total number of vehicles.</span>
+<span id="cb38-316"><a href="#cb38-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-317"><a href="#cb38-317" aria-hidden="true" tabindex="-1"></a>**lpg:** A column in my_data4 data set which represents the vehicles which operates with LPG.</span>
+<span id="cb38-318"><a href="#cb38-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-319"><a href="#cb38-319" aria-hidden="true" tabindex="-1"></a>**percentage_lpg:** A character column which represents the number of vehicles that uses lpg over total number of vehicles.</span>
+<span id="cb38-320"><a href="#cb38-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-321"><a href="#cb38-321" aria-hidden="true" tabindex="-1"></a>**hybrid:** A column in my_data4 data set which represents the vehicles which operates with hybrid.</span>
+<span id="cb38-322"><a href="#cb38-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-323"><a href="#cb38-323" aria-hidden="true" tabindex="-1"></a>**percentage_hybrid:** A character column which represents the number of vehicles that are hybrid over total number of vehicles.</span>
+<span id="cb38-324"><a href="#cb38-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-325"><a href="#cb38-325" aria-hidden="true" tabindex="-1"></a>**electric:** A column in my_data4 data set which represents the vehicles which operates with electric.</span>
+<span id="cb38-326"><a href="#cb38-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-327"><a href="#cb38-327" aria-hidden="true" tabindex="-1"></a>**percentage_electric:** A character column which represents the number of vehicles that uses electric over total number of vehicles.</span>
+<span id="cb38-328"><a href="#cb38-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-329"><a href="#cb38-329" aria-hidden="true" tabindex="-1"></a>**unknown:** A column in my_data4 data set which represents the vehicles which operates with unknown power.</span>
+<span id="cb38-330"><a href="#cb38-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-331"><a href="#cb38-331" aria-hidden="true" tabindex="-1"></a>**percentage_unknown:** A character column which represents the number of vehicles that are unknown over total number of vehicles.</span>
+<span id="cb38-332"><a href="#cb38-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-333"><a href="#cb38-333" aria-hidden="true" tabindex="-1"></a><span class="fu">## Vehicle Trends</span></span>
+<span id="cb38-334"><a href="#cb38-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-335"><a href="#cb38-335" aria-hidden="true" tabindex="-1"></a>How about the adoption of EVs and the others in Turkey? In this part of analysing, my_data4 will be using.</span>
+<span id="cb38-336"><a href="#cb38-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-339"><a href="#cb38-339" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-340"><a href="#cb38-340" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-341"><a href="#cb38-341" aria-hidden="true" tabindex="-1"></a>tr_vehicle_num <span class="ot">&lt;-</span> my_data4 <span class="sc">|&gt;</span></span>
+<span id="cb38-342"><a href="#cb38-342" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), as.numeric)) <span class="sc">|&gt;</span></span>
+<span id="cb38-343"><a href="#cb38-343" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"percentage"</span>))</span>
+<span id="cb38-344"><a href="#cb38-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-345"><a href="#cb38-345" aria-hidden="true" tabindex="-1"></a>tr_vehicle_num_long <span class="ot">&lt;-</span> tr_vehicle_num <span class="sc">|&gt;</span></span>
+<span id="cb38-346"><a href="#cb38-346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb38-347"><a href="#cb38-347" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(gas, diesel, lpg, hybrid, electric, unknown), </span>
+<span id="cb38-348"><a href="#cb38-348" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"vehicle_type"</span>, </span>
+<span id="cb38-349"><a href="#cb38-349" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span>        </span>
+<span id="cb38-350"><a href="#cb38-350" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb38-351"><a href="#cb38-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-352"><a href="#cb38-352" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tr_vehicle_num_long)</span>
+<span id="cb38-353"><a href="#cb38-353" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-354"><a href="#cb38-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-355"><a href="#cb38-355" aria-hidden="true" tabindex="-1"></a>These are provided in the line plot below.</span>
+<span id="cb38-356"><a href="#cb38-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-359"><a href="#cb38-359" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-360"><a href="#cb38-360" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb38-361"><a href="#cb38-361" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tr_vehicle_num_long, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">color =</span> vehicle_type)) <span class="sc">+</span></span>
+<span id="cb38-362"><a href="#cb38-362" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb38-363"><a href="#cb38-363" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb38-364"><a href="#cb38-364" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Value"</span>,</span>
+<span id="cb38-365"><a href="#cb38-365" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Vehicle Trends in Turkey Over Time (Logarithmic Scale)"</span>,</span>
+<span id="cb38-366"><a href="#cb38-366" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"From 2011 to 2021"</span></span>
+<span id="cb38-367"><a href="#cb38-367" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb38-368"><a href="#cb38-368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2011</span><span class="sc">:</span><span class="dv">2021</span>) <span class="sc">+</span></span>
+<span id="cb38-369"><a href="#cb38-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb38-370"><a href="#cb38-370" aria-hidden="true" tabindex="-1"></a>    <span class="at">trans =</span> <span class="st">"log10"</span>,</span>
+<span id="cb38-371"><a href="#cb38-371" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>, <span class="dv">1000000</span>, <span class="dv">10000000</span>),</span>
+<span id="cb38-372"><a href="#cb38-372" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"10"</span>, <span class="st">"100"</span>, <span class="st">"1K"</span>, <span class="st">"10K"</span>, <span class="st">"100K"</span>, <span class="st">"1M"</span>, <span class="st">"10M"</span>)</span>
+<span id="cb38-373"><a href="#cb38-373" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb38-374"><a href="#cb38-374" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb38-375"><a href="#cb38-375" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb38-376"><a href="#cb38-376" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-377"><a href="#cb38-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-378"><a href="#cb38-378" aria-hidden="true" tabindex="-1"></a>Although there was an increase in EV's and hybrid vehicles, Turkey's total transportation carbondioxide emission has increased consistently (information from Country Based Mean Transportation CO2 Emission part) and the effect of COVID-19 pandemic was quite temporary on it.</span>
+<span id="cb38-379"><a href="#cb38-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-380"><a href="#cb38-380" aria-hidden="true" tabindex="-1"></a>The cumulative bar plot below displays the proportion of vehicle types over time.</span>
+<span id="cb38-381"><a href="#cb38-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-384"><a href="#cb38-384" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-385"><a href="#cb38-385" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-386"><a href="#cb38-386" aria-hidden="true" tabindex="-1"></a>vehicle_prop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"percentage_gas"</span>, <span class="st">"percentage_diesel"</span>, <span class="st">"percentage_lpg"</span>, <span class="st">"percentage_hybrid"</span>, <span class="st">"percentage_electric"</span>, <span class="st">"percentage_unknown"</span>)</span>
+<span id="cb38-387"><a href="#cb38-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-388"><a href="#cb38-388" aria-hidden="true" tabindex="-1"></a>tr_vehicle_perc_long <span class="ot">&lt;-</span> my_data4 <span class="sc">|&gt;</span></span>
+<span id="cb38-389"><a href="#cb38-389" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> vehicle_prop, <span class="at">names_to =</span> <span class="st">"vehicle_type"</span>, <span class="at">values_to =</span> <span class="st">"percentage"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-390"><a href="#cb38-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, vehicle_type, <span class="fu">starts_with</span>(<span class="st">"percentage"</span>))</span>
+<span id="cb38-391"><a href="#cb38-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-392"><a href="#cb38-392" aria-hidden="true" tabindex="-1"></a>tr_vehicle_perc_long<span class="sc">$</span>percentage <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(tr_vehicle_perc_long<span class="sc">$</span>percentage)</span>
+<span id="cb38-393"><a href="#cb38-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-394"><a href="#cb38-394" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tr_vehicle_perc_long)</span>
+<span id="cb38-395"><a href="#cb38-395" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-396"><a href="#cb38-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-399"><a href="#cb38-399" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-400"><a href="#cb38-400" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-401"><a href="#cb38-401" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tr_vehicle_perc_long, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> percentage, <span class="at">fill =</span> vehicle_type)) <span class="sc">+</span></span>
+<span id="cb38-402"><a href="#cb38-402" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">width =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb38-403"><a href="#cb38-403" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Paired"</span>) <span class="sc">+</span></span>
+<span id="cb38-404"><a href="#cb38-404" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb38-405"><a href="#cb38-405" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Percentage"</span>,</span>
+<span id="cb38-406"><a href="#cb38-406" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Vehicle Propensity in Turkey Over Time"</span>,</span>
+<span id="cb38-407"><a href="#cb38-407" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"From 2011 to 2021"</span></span>
+<span id="cb38-408"><a href="#cb38-408" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb38-409"><a href="#cb38-409" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte</span>()</span>
+<span id="cb38-410"><a href="#cb38-410" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-411"><a href="#cb38-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-412"><a href="#cb38-412" aria-hidden="true" tabindex="-1"></a>In fact, non-EV's were still used widely in Turkey, leading to increasing carbondioxide emission levels.</span>
+<span id="cb38-413"><a href="#cb38-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-414"><a href="#cb38-414" aria-hidden="true" tabindex="-1"></a><span class="fu">## Mean Transportation Emission</span></span>
+<span id="cb38-415"><a href="#cb38-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-416"><a href="#cb38-416" aria-hidden="true" tabindex="-1"></a>Turkey's average transportation carbondioxide emission per vehicle is displayed in the line plot below.</span>
+<span id="cb38-417"><a href="#cb38-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-420"><a href="#cb38-420" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-421"><a href="#cb38-421" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-422"><a href="#cb38-422" aria-hidden="true" tabindex="-1"></a>tr_emission <span class="ot">&lt;-</span> my_data3 <span class="sc">|&gt;</span></span>
+<span id="cb38-423"><a href="#cb38-423" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(entity <span class="sc">==</span> <span class="st">"Turkey"</span>)</span>
+<span id="cb38-424"><a href="#cb38-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-425"><a href="#cb38-425" aria-hidden="true" tabindex="-1"></a>tr_vehicle <span class="ot">&lt;-</span> my_data4 <span class="sc">|&gt;</span></span>
+<span id="cb38-426"><a href="#cb38-426" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, total)</span>
+<span id="cb38-427"><a href="#cb38-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-428"><a href="#cb38-428" aria-hidden="true" tabindex="-1"></a>tr_vehicle<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(tr_vehicle<span class="sc">$</span>year)</span>
+<span id="cb38-429"><a href="#cb38-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-430"><a href="#cb38-430" aria-hidden="true" tabindex="-1"></a>tr_emission_n_vehicle <span class="ot">&lt;-</span> tr_emission <span class="sc">|&gt;</span></span>
+<span id="cb38-431"><a href="#cb38-431" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(tr_vehicle, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"year"</span>))</span>
+<span id="cb38-432"><a href="#cb38-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-433"><a href="#cb38-433" aria-hidden="true" tabindex="-1"></a>tr_emission_n_vehicle<span class="sc">$</span>total <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(tr_emission_n_vehicle<span class="sc">$</span>total)</span>
+<span id="cb38-434"><a href="#cb38-434" aria-hidden="true" tabindex="-1"></a>tr_emission_n_vehicle<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(tr_emission_n_vehicle<span class="sc">$</span>year)</span>
+<span id="cb38-435"><a href="#cb38-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-436"><a href="#cb38-436" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tr_emission_n_vehicle)</span>
+<span id="cb38-437"><a href="#cb38-437" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-438"><a href="#cb38-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-441"><a href="#cb38-441" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-442"><a href="#cb38-442" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-443"><a href="#cb38-443" aria-hidden="true" tabindex="-1"></a>tr_avg_emission <span class="ot">&lt;-</span> tr_emission_n_vehicle <span class="sc">|&gt;</span></span>
+<span id="cb38-444"><a href="#cb38-444" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">avg_co2_emission_per_vehicle =</span> transport_co2_emissions <span class="sc">/</span> total) <span class="sc">|&gt;</span></span>
+<span id="cb38-445"><a href="#cb38-445" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> avg_co2_emission_per_vehicle)) <span class="sc">+</span></span>
+<span id="cb38-446"><a href="#cb38-446" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb38-447"><a href="#cb38-447" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2011</span><span class="sc">:</span><span class="dv">2021</span>) <span class="sc">+</span></span>
+<span id="cb38-448"><a href="#cb38-448" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">2020</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb38-449"><a href="#cb38-449" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">x =</span> <span class="dv">2020</span>, <span class="at">y =</span> <span class="fl">5.5</span>, <span class="at">label =</span> <span class="st">"pandemic"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb38-450"><a href="#cb38-450" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb38-451"><a href="#cb38-451" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average CO2 Emission per Year"</span>,</span>
+<span id="cb38-452"><a href="#cb38-452" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Average CO2 Emission Per Vehicle in Turkey (in tons)"</span>,</span>
+<span id="cb38-453"><a href="#cb38-453" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"How much carbondioxide does a vehicle emit on the average?"</span></span>
+<span id="cb38-454"><a href="#cb38-454" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb38-455"><a href="#cb38-455" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb38-456"><a href="#cb38-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-457"><a href="#cb38-457" aria-hidden="true" tabindex="-1"></a>tr_avg_emission</span>
+<span id="cb38-458"><a href="#cb38-458" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-459"><a href="#cb38-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-460"><a href="#cb38-460" aria-hidden="true" tabindex="-1"></a><span class="fu"># Income Based Mean Emission (An addition part, my_data3)</span></span>
+<span id="cb38-461"><a href="#cb38-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-462"><a href="#cb38-462" aria-hidden="true" tabindex="-1"></a>my_data3 has some columns which represents the countries according to their income levels. Therefore, here is the visualization of how the mean carbondioxide emissions has changed by countries' income level. (Buraya lineplot yapilacak degisiklikler olacak ve eklenen seylerin aciklamalari yazilacak.)</span>
+<span id="cb38-463"><a href="#cb38-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-466"><a href="#cb38-466" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-467"><a href="#cb38-467" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-468"><a href="#cb38-468" aria-hidden="true" tabindex="-1"></a>countries_by_income <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb38-469"><a href="#cb38-469" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Upper-middle-income countries"</span>, </span>
+<span id="cb38-470"><a href="#cb38-470" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Lower-middle-income countries"</span>, </span>
+<span id="cb38-471"><a href="#cb38-471" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Low-income countries"</span>, </span>
+<span id="cb38-472"><a href="#cb38-472" aria-hidden="true" tabindex="-1"></a>  <span class="st">"High-income countries"</span></span>
+<span id="cb38-473"><a href="#cb38-473" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-474"><a href="#cb38-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-475"><a href="#cb38-475" aria-hidden="true" tabindex="-1"></a>total_co2_emission_by_income <span class="ot">&lt;-</span> my_data3 <span class="sc">|&gt;</span> </span>
+<span id="cb38-476"><a href="#cb38-476" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(entity <span class="sc">%in%</span> countries_by_income) <span class="sc">|&gt;</span></span>
+<span id="cb38-477"><a href="#cb38-477" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">income_class =</span> entity) <span class="sc">|&gt;</span></span>
+<span id="cb38-478"><a href="#cb38-478" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(income_class) <span class="sc">|&gt;</span></span>
+<span id="cb38-479"><a href="#cb38-479" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_co2_income =</span> <span class="fu">sum</span>(transport_co2_emissions, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb38-480"><a href="#cb38-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-481"><a href="#cb38-481" aria-hidden="true" tabindex="-1"></a>total_co2_emission_by_income</span>
+<span id="cb38-482"><a href="#cb38-482" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-483"><a href="#cb38-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-486"><a href="#cb38-486" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-487"><a href="#cb38-487" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb38-488"><a href="#cb38-488" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(total_co2_emission_by_income, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(income_class, total_co2_income), <span class="at">y =</span> total_co2_income, <span class="at">fill =</span> income_class)) <span class="sc">+</span></span>
+<span id="cb38-489"><a href="#cb38-489" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb38-490"><a href="#cb38-490" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale =</span> <span class="dv">1</span>, <span class="at">accuracy =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb38-491"><a href="#cb38-491" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb38-492"><a href="#cb38-492" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Income Class"</span>,</span>
+<span id="cb38-493"><a href="#cb38-493" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total CO2 Emission"</span>,</span>
+<span id="cb38-494"><a href="#cb38-494" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Total CO2 Emission by Income Class"</span>,</span>
+<span id="cb38-495"><a href="#cb38-495" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"From 2011 to 2021 (in tons)"</span>) <span class="sc">+</span></span>
+<span id="cb38-496"><a href="#cb38-496" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb38-497"><a href="#cb38-497" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb38-498"><a href="#cb38-498" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-499"><a href="#cb38-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-500"><a href="#cb38-500" aria-hidden="true" tabindex="-1"></a>As expected, the more income levels, the high emission levels that a country would have.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
