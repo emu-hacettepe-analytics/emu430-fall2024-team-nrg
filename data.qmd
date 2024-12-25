@@ -7,6 +7,22 @@ execute:
   warning: false
 ---
 
+# Library Preparation
+
+```{r}
+#| echo: true
+#| message: false
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(scales)
+library(readr)
+library(readxl)
+library(ggthemes)
+library(forcats)
+library(jsonlite)
+```
+
 ![](docs/batman-thinking.gif){fig-align="center" width="%20"}
 
 # Data Source
@@ -31,10 +47,6 @@ This data is used for detecting global electric vehicle sales by country and acr
 To download this data, the following codes are used.
 
 ```{r}
-#| warning: false
-library(readr)
-library(readxl)
-
 # The following code is used to download the data from excel. Necessary adaptions must be made according to your local computer.
 
 # my_data2 <- read_csv("C:/files/my_data2.csv")
@@ -49,9 +61,6 @@ This data is used to determine vehicle-related CO2 emissions globally and by cou
 To download this data, the following codes are used.
 
 ```{r}
-#| warning: false
-library(jsonlite)
-
 # Fetch the data
 my_data3 <- read.csv("https://ourworldindata.org/grapher/co2-emissions-transport.csv?v=1&csvType=full&useColumnShortNames=true")
 
@@ -68,8 +77,6 @@ This data is used to analyse Turkiye's status about EVs.
 To download this data, the following codes are used.
 
 ```{r}
-library(readxl)
-
 # The following code is used to download the data from excel. Necessary adaptions must be made according to your local computer. 
 
 # my_data4 <- read_excel("C:/files/my_data4.xls",sheet = 1)
@@ -84,10 +91,6 @@ This data is used to determine transportation CO2 emissions per person for each 
 To download this data, the following codes are used.
 
 ```{r}
-#| warning: false
-library(readr)
-library(readxl)
-
 # The following code is used to download the data from excel. Necessary adaptions must be made according to your local computer.
 
 # my_data8 <- read_csv("C:/files/my_data8.csv")
@@ -102,7 +105,7 @@ Before starting the analysis, let's make the columns more understandable. Note t
 ### my_data2
 
 ```{r}
-#| eval: false
+#| echo: true
 my_data2 <- my_data2 |>
   filter(year %in% 2011:2021)
 
@@ -114,7 +117,7 @@ There was no need to rename the columns of **my_data2.**
 ### my_data3
 
 ```{r}
-#| eval: false
+#| echo: true
 my_data3 <- my_data3 |>
   rename(entity = Entity,
          code = Code,
@@ -128,7 +131,7 @@ head(my_data3, 10)
 ### my_data4
 
 ```{r}
-#| eval: false
+#| echo: true
 my_data4 <- my_data4 |>
   rename(year = Yıl,
          total = Toplam,
@@ -154,10 +157,8 @@ head(my_data4, 10)
 
 ### my_data8
 
-
-
 ```{r}
-#| eval: false
+#| echo: true
 my_data8 <- my_data8 |>
   rename(entity = Entity,
          year = Year,
