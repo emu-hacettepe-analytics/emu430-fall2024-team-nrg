@@ -105,6 +105,8 @@ Before starting the analysis, let's make the columns more understandable. Note t
 #| eval: false
 my_data2 <- my_data2 |>
   filter(year %in% 2011:2021)
+
+head(my_data2, 10)
 ```
 
 There was no need to rename the columns of **my_data2.**
@@ -119,6 +121,8 @@ my_data3 <- my_data3 |>
          year = Year
   ) |>
   filter(year %in% 2011:2021)
+
+head(my_data3, 10)
 ```
 
 ### my_data4
@@ -144,6 +148,8 @@ my_data4 <- my_data4 |>
          percentage_unknown = ...15
   ) |>
   filter(year %in% 2011:2021)
+
+head(my_data4, 10)
 ```
 
 ### my_data8
@@ -158,6 +164,8 @@ my_data8 <- my_data8 |>
          population = Population...Sex..all...Age..all...Variant..estimates
          ) |>
   filter(year %in% 2011:2021)
+
+head(my_data8, 10)
 ```
 
 ![](docs/date-everywhere-data.gif){fig-align="center" width="400"}
