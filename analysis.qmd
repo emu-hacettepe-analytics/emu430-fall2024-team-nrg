@@ -231,7 +231,7 @@ Here are some observations from this graph:
 
 4.  The decrease **in 2020** can be seen again.
 
-# Global EV Sales (my_data2)
+# GLOBAL EV SALES (my_data2)
 
 ```{r}
 str(my_data2)
@@ -369,7 +369,7 @@ each selected region",
 
 The correlation between total sales and carbondioxide emission is **not always** positive. **Half of the countries** has succeeded to decrease their carbondioxide emissions despite their increase in the **total EV sales**.
 
-# Turkey's Status (my_data4)
+# TURKEY's STATUS (my_data4)
 
 ```{r}
 #| echo: true
@@ -485,49 +485,5 @@ ggplot(tr_vehicle_perc_long, aes(x = year, y = percentage, fill = vehicle_type))
 ```
 
 In fact, **non-EV's** were still used widely **in Turkey**, leading to be the one of the reason of increase in carbondioxide emission levels.
-
-## Mean Transportation Emission (my_data3 and my_data8)
-
-**Turkey's** average transportation carbondioxide emission per vehicle is displayed in the line plot below.
-
-```{r}
-#| echo: true
-tr_emission <- my_data3 |>
-  filter(entity == "Turkey")
-
-tr_vehicle <- my_data4 |>
-  select(year, total)
-
-tr_vehicle$year <- as.numeric(tr_vehicle$year)
-
-tr_emission_n_vehicle <- tr_emission |>
-  left_join(tr_vehicle, by = c("year"))
-
-tr_emission_n_vehicle$total <- as.numeric(tr_emission_n_vehicle$total)
-tr_emission_n_vehicle$year <- as.numeric(tr_emission_n_vehicle$year)
-
-head(tr_emission_n_vehicle)
-```
-
-Here, **my_data3** and **my_data8** have been joined to be able to display Turkey's average transport carbondioxide emission per vehicle.
-
-```{r}
-#| echo: true
-tr_avg_emission <- tr_emission_n_vehicle |>
-  mutate(avg_co2_emission_per_vehicle = transport_co2_emissions / total) |>
-  ggplot(aes(x = year, y = avg_co2_emission_per_vehicle)) +
-  geom_line(color = "blue", size = 1) +
-  scale_x_continuous(breaks = 2011:2021) +
-  geom_vline(xintercept = 2020, color = "black", size = 0.5, linetype = "dashed") +
-  geom_text(x = 2020, y = 5.5, label = "pandemic", color = "black", vjust = -1) +
-  labs(x = "Year",
-       y = "Average CO2 Emission per Year",
-       title = "Average CO2 Emission Per Vehicle in Turkey (in tons)",
-       subtitle = "How much carbondioxide does a vehicle emit on the average?"
-  ) +
-  theme_minimal()
-
-tr_avg_emission
-```
 
 ![](docs/jaydenj-kirby.gif){fig-align="center" width="%30"}
