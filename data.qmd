@@ -1,3 +1,12 @@
+---
+format:
+  html:
+    code-tools: true
+    code-fold: true
+execute:
+  warning: false
+---
+
 ![](docs/batman-thinking.gif){fig-align="center" width="%20"}
 
 # Data Source
@@ -84,6 +93,69 @@ library(readxl)
 # my_data2 <- read_csv("C:/files/my_data8.csv")
 
 head(my_data8, 10)
+```
+
+## RENAMING AND FILTERING THE DATA SETS
+
+Before starting the analysis, let's make the columns more understandable. Note that the time frame between 2011 and 2021 will be used in the analysis.
+
+### my_data2
+
+```{r}
+#| eval: false
+my_data2 <- my_data2 |>
+  filter(year %in% c(2011:2021))
+```
+
+There was no need to rename the columns of **my_data2.**
+
+### my_data3
+
+```{r}
+#| eval: false
+my_data3 <- my_data3 |>
+  rename(entity = Entity,
+         code = Code,
+         year = Year
+  ) |>
+  filter(year %in% c(2011:2021))
+```
+
+### my_data4
+
+```{r}
+#| eval: false
+my_data4 <- my_data4 |>
+  rename(year = Yıl,
+         total = Toplam,
+         gas = Benzin,
+         diesel = Dizel,
+         lpg = LPG,
+         hybrid = `Hibrit (2)`,
+         electric = Elektrik,
+         unknown = `Bilinmeyen (3)`
+  ) |>
+  rename(percentage_total = ...3,
+         percentage_gas = ...5,
+         percentage_diesel = ...7,
+         percentage_lpg = ...9,
+         percentage_hybrid = ...11,
+         percentage_electric = ...13,
+         percentage_unknown = ...15
+  ) |>
+  filter(year %in% c(2011:2021))
+```
+
+### my_data8
+
+```{r}
+#| eval: false
+my_data8 <- my_data8 |>
+  rename(entity = Entity,
+         year = Year,
+         population = Population...Sex..all...Age..all...Variant..estimates
+         ) |>
+  filter(year %in% 2011:2021)
 ```
 
 ![](docs/date-everywhere-data.gif){fig-align="center" width="400"}

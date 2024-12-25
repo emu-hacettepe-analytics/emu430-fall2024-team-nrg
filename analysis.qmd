@@ -207,7 +207,7 @@ head(pop_n_co2)
 
 After that, the data has filtered by selected countries.
 
-The line plot below visualizes the selected countries' carbondioxide emission by person on the average over time:
+The line plot below visualizes the selected countries' carbondioxide emission per person on the average over time:
 
 ```{r}
 ggplot(pop_n_co2, aes(x = year, y = prop, color = entity)) +
@@ -215,7 +215,7 @@ ggplot(pop_n_co2, aes(x = year, y = prop, color = entity)) +
   scale_x_continuous(breaks = 2011:2021) +
   labs(x = "Year",
        y = "CO2 Emission (in tons) / Population",
-       title = "CO2 Emission by Person",
+       title = "CO2 Emission per Person",
        subtitle = "Describes how much carbondioxide emission does a person emits on the average
 (in tons)",
        color = "Entity")
@@ -223,96 +223,13 @@ ggplot(pop_n_co2, aes(x = year, y = prop, color = entity)) +
 
 Here are some observations from this graph:
 
-1.  When we analyze the transportation carbon emission by person, even China has the one of the highest total transportation carbondioxide emission, it can be seen that **China** has the lowest transportation carbondioxide emission per person among all other countries. While **USA** on the other hand, still has the highest level.
+1.  When we analyze the transportation carbon emission per person, even China has the one of the highest total transportation carbondioxide emission, it can be seen that **China** has the lowest transportation carbondioxide emission per person among all other countries. While **USA** on the other hand, still has the highest level.
 
-2.  **Denmark's, Norway's and Japan's** transportation carbon emission by person have a **decreasing** trend.
+2.  **Denmark's, Norway's and Japan's** transportation carbon emission per person have a **decreasing** trend.
 
 3.  **Turkey's** transportation carbon emission per person is **not high** but it has an **increasing** trend.
 
 4.  The decrease **in 2020** can be seen again.
-
-What about the effect of income levels on transport carbondioxide emission? Let's analyze this too.
-
-## Income Based Mean Emission
-
-**my_data3** has some columns which represent the countries based on their income levels. Therefore, here is the visualization of how the total carbondioxide emissions has changed by countries' income level.
-
-```{r}
-#| echo: true
-countries_by_income <- c(
-  "Upper-middle-income countries", 
-  "Lower-middle-income countries", 
-  "Low-income countries", 
-  "High-income countries"
-)
-
-total_co2_emission_by_income <- my_data3 |> 
-  filter(entity %in% countries_by_income) |>
-  rename(income_class = entity) |>
-  group_by(income_class) |>
-  summarize(total_co2_income = sum(transport_co2_emissions, na.rm = TRUE))
-
-head(total_co2_emission_by_income)
-```
-
-The column name entity has been changed with income_class.
-
-```{r}
-#| echo: true
-ggplot(total_co2_emission_by_income, aes(x = reorder(income_class, total_co2_income), y = total_co2_income, fill = income_class)) +
-  geom_col() +
-  scale_y_continuous(labels = label_number(scale = 1, accuracy = 1)) +
-  coord_flip() +
-  labs(x = "Income Class",
-       y = "Total CO2 Emission",
-       title = "Total CO2 Emission by Income Class",
-       subtitle = "From 2011 to 2021 (in tons)") +
-  theme_light() +
-  theme(legend.position = "none")
-```
-
-The more income, the more carbondioxide that a country emits.
-
-It is reasonable to explore the carbondioxide emissions by income level over the years.
-
-```{r}
-countries_selected <- c("United States", "Norway", "Denmark", "China", "Japan", "Turkey")
-
-countries_by_income <- c(
-  "Upper-middle-income countries", 
-  "Lower-middle-income countries", 
-  "Low-income countries", 
-  "High-income countries"
-)
-
-co2_by_income <- my_data3 |> 
-  filter(entity %in% countries_by_income) |>
-  rename(income_class = entity) |>
-  group_by(income_class) |>
-  select(-code)
-head(co2_by_income)
-```
-
-The line plot can be seen below.
-
-```{r}
-ggplot(co2_by_income, aes(x = year, y = transport_co2_emissions, color = income_class)) +
-  geom_line(size = 1) +
-  scale_x_continuous(breaks = 2011:2021) +
-  scale_y_continuous(
-    trans = "log10",
-    breaks = c(1000000, 10000000, 100000000, 1000000000, 2000000000, 3000000000, 4000000000),
-    labels = c("1M", "10M", "100M", "1B", "2B", "3B", "4B")
-  ) +
-  labs(x = "Year",
-       y = "CO2 Emission (in tons)",
-       title = "Carbondioxide Emissions by Income Level",
-       subtitle = "From 2011 to 2021",
-       color = "Income Class") +
-  theme_light()
-```
-
-The proportionality explained above can be still adopted.
 
 # Global EV Sales (my_data2)
 
