@@ -141,7 +141,7 @@ ggplot(emission_by_country, aes(x = year, y = transport_co2_emissions, color = e
        ) +
   theme_bw() +
   theme(legend.position = "none",
-        axis.text.x = element_text(angle = 90, hjust = 1)) # rotate x-axis labels
+        axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 Here are some observations from this graph:
@@ -172,7 +172,7 @@ ggplot(emission_by_country, aes(x = year, y = transport_co2_emissions, color = e
        ) +
   theme_bw() +
   theme(legend.position = "none",
-        axis.text.x = element_text(angle = 90, hjust = 1)) # rotate x-axis labels
+        axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 Here are some observations from this graph:
@@ -191,7 +191,11 @@ This graphs gives a lot of information about transportation carbondioxide emissi
 str(my_data8)
 ```
 
-EXPLANATION ?
+**entity:** A character column in my_data3 data set which represents the countries.
+
+**year:** An integer column in my_data3 data set which represents the year.
+
+**population:** A numeric column in my_data8 data set which represents the population of each country.
 
 ```{r}
 countries_selected <- c("United States", "Norway", "Denmark", "China", "Japan", "Turkey")
@@ -308,9 +312,8 @@ top6_ev_sales |> group_by(year, region, powertrain) |>
   ) +
   facet_wrap(~ region) +
   theme_light() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + # rotate x-axis labels
-  guides(color = "none") # remove the region legend
-  
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  guides(color = "none")
 top6_ev_sales
 ```
 
@@ -445,7 +448,8 @@ ggplot(tr_vehicle_num_long, aes(x = year, y = value, color = vehicle_type)) +
   labs(x = "Year",
        y = "Value",
        title = "Vehicle Trends in Turkey Over Time (Logarithmic Scale)",
-       subtitle = "From 2011 to 2021"
+       subtitle = "From 2011 to 2021",
+       color = "Vehicle Type"
   ) +
   scale_x_continuous(breaks = 2011:2021) +
   scale_y_continuous(
@@ -485,7 +489,8 @@ ggplot(tr_vehicle_perc_long, aes(x = year, y = percentage, fill = vehicle_type))
   labs(x = "Year",
        y = "Percentage",
        title = "Vehicle Propensity in Turkey Over Time",
-       subtitle = "From 2011 to 2021"
+       subtitle = "From 2011 to 2021",
+       fill = "Vehicle Type"
   ) +
   theme_tufte()
 ```
