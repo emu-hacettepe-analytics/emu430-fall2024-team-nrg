@@ -96,7 +96,13 @@ ggplot(mean_co2_emission_by_country, aes(x = reorder(entity_lumped, mean_co2_emi
   theme(legend.position = "none")
 ```
 
-**Conclusion:**
+**Conclusions:**
+
+-   The histogram above clearly demonstrates that per capita CO₂ emissions in both the United States and China are significantly higher than the global average. This disparity has been one of the primary drivers behind the recent surge in renewable energy investments and efforts to move away from fossil fuels in both countries.
+
+-   High emission levels have placed immense pressure on the United States and China to address climate change, accelerating their transition to sustainable energy sources.
+
+-   The renewable energy initiatives undertaken by these two nations have created a significant domino effect worldwide, propelling the global shift toward the sustainability era. These efforts are not only aimed at reducing their own high emission levels but also serve as an example for other countries to transition to cleaner energy systems. One of the most tangible examples of this influence is the rapidly growing electric vehicle (EV) sector, driven by the United States as a hub of technological innovation and China as the world’s largest manufacturer and market for EVs.
 
 -   **The big majority** of mean transportation carbondioxide emissions consisted of top 20 countries.
 
@@ -485,5 +491,17 @@ ggplot(tr_vehicle_perc_long, aes(x = year, y = percentage, fill = vehicle_type))
 ```
 
 In fact, **non-EV's** were still used widely **in Turkey**, leading to be the one of the reason of increase in carbondioxide emission levels.
+
+# KEY TAKEAWAYS
+
+-   **Electric Vehicles (EV's) and CO2 Emissions:** This study examines the impact of EV adoption on CO2 emissions in the transportation sector. The analysis covers global EV sales trends and CO2 emission levels in various countries over the past decade. • Data sources and scope: The analysis uses data from my_data3, my_data2, and my_data4, which include information on transportation-related CO2 emissions, population statistics, and EV sales. The study focuses on both global and Turkey-specific trends.
+
+-   **Key Findings:** While countries like China and the United States have seen an increase in CO2 emissions, Norway and Denmark have demonstrated a decrease in emissions due to strong adoption of non-carbon emitting vehicles.
+
+    Although Turkey has increased the number of electric and hybrid vehicles, overall CO2 emissions have not significantly decreased, highlighting the need for infrastructure improvements and greater use of renewable energy sources.
+
+-   **Factors Influencing Success:** The adoption of electric vehicles is most effective when influenced by factors such as population density and energy infrastructure.
+
+-   **Main Outcome:** The study concludes that while EV adoption has the potential to significantly reduce transportation-related emissions, its effectiveness depends on factors such as population density and the transition to renewable energy sources.
 
 ![](docs/jaydenj-kirby.gif){fig-align="center" width="%30"}
