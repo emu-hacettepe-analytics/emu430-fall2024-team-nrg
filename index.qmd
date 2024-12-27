@@ -6,7 +6,7 @@ execute:
   warning: false
 ---
 
-![](docs/gif.gif){fig-align="center" width="450"}\](https://youtu.be/U1NAGWA7AE0)
+[![](docs/gif.gif){fig-align="center" width="450"}](https://youtu.be/U1NAGWA7AE0)
 
 # Team Members
 
