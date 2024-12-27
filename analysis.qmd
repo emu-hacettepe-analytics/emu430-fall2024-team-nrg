@@ -16,6 +16,8 @@ execute:
   warning: false
 ---
 
+![](docs/kowalski-analysis-thinking.gif){fig-align="center" width="%20"}
+
 # Library Preparation
 
 ```{r}
@@ -531,3 +533,5 @@ Although Turkey has increased the number of electric and hybrid vehicles, overal
 -   **Factors Influencing Success:** The adoption of electric vehicles is most effective when influenced by factors such as population density and energy infrastructure.
 
 -   **Main Outcome:** The study concludes that while EV adoption has the potential to significantly reduce transportation-related emissions, its effectiveness depends on factors such as population density and the transition to renewable energy sources.
+
+![](docs/jaydenj-kirby.gif){fig-align="center" width="%30"}

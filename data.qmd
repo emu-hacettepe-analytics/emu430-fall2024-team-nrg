@@ -16,6 +16,8 @@ execute:
   warning: false
 ---
 
+![](docs/batman-thinking.gif){fig-align="center" width="%20"}
+
 # Library Preparation
 
 ```{r}
@@ -49,8 +51,7 @@ load("emu430_initial_project_workspace.RData")
 
 # GLOBAL EV SALES DATA (my_data2)
 
-This data is used for detecting global electric vehicle sales by country and
-across the world.
+This data is used for detecting global electric vehicle sales by country and across the world.
 
 To download this data, the following codes are used.
 
@@ -65,8 +66,7 @@ head(my_data2, 10)
 
 # CO2 EMISSION FROM TRANSPORT DATA (my_data3)
 
-This data is used to determine vehicle-related CO2 emissions globally and by
-country.
+This data is used to determine vehicle-related CO2 emissions globally and by country.
 
 To download this data, the following codes are used.
 
@@ -112,8 +112,7 @@ head(my_data8, 10)
 
 # RENAMING AND FILTERING THE DATA SETS
 
-Before starting the analysis, let's make the columns more understandable. Note
-that the time frame between 2011 and 2021 will be used in the analysis.
+Before starting the analysis, let's make the columns more understandable. Note that the time frame between 2011 and 2021 will be used in the analysis.
 
 ### my_data2
 
@@ -181,3 +180,5 @@ my_data8 <- my_data8 |>
 
 head(my_data8, 10)
 ```
+
+![](docs/date-everywhere-data.gif){fig-align="center" width="400"}
