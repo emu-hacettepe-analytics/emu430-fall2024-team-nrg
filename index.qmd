@@ -1,8 +1,18 @@
 ---
-sidebar: false 
+format:
+  html:
+    sidebar: false
+  pdf:
+    colorlinks: true
+    papersize: a4
+    fontsize: 11pt
+    margin-left: 2cm
+    margin-right: 2cm
+    margin-top: 2cm
+    margin-bottom: 2cm
+execute:
+  warning: false
 ---
-
-![](docs/gif.gif){fig-align="center" width="450"}
 
 # Team Members
 
@@ -18,24 +28,46 @@ sidebar: false
 
 # Project Topic
 
-This project explores the role of electric vehicles (EVs) in reducing carbon emissions compared to traditional vehicles. The analysis is divided into three key sections:
+This project explores the role of electric vehicles (EVs) in reducing carbon
+emissions compared to traditional vehicles. The analysis is divided into three
+key sections:
 
 **1. Highlighting EV Benefits:** Presenting data to demonstrate the low carbon emissions associated with electric vehicles, emphasizing their environmental advantages.
 
-**2. Global Trends:** Presenting data on the adoption of EVs and transportation-related carbon emissions worldwide over the years, highlighting comparative trends.
+**2. Global Trends:** Presenting data on the adoption of EVs and
+transportation-related carbon emissions worldwide over the years, highlighting comparative trends.
 
-**3. Türkiye's Status and Recommendations:** Analyzing the progress of EV adoption in Türkiye, interpreting its current standing, and proposing actionable strategies based on global benchmarks to enhance sustainability in the transportation sector. This comprehensive study aims to shed light on the environmental benefits of EVs and offer data-driven recommendations for Türkiye’s transportation sector.
+**3. Türkiye's Status and Recommendations:** Analyzing the progress of EV
+adoption in Türkiye, interpreting its current standing, and proposing actionable strategies based on global benchmarks to enhance sustainability in the
+transportation sector. This comprehensive study aims to shed light on the
+environmental benefits of EVs and offer data-driven recommendations for
+Türkiye’s transportation sector.
 
 # General Information
 
--   The aim of our project is to examine the impact of electric vehicles (EVs) on CO2 emissions and analyze the integration of electric vehicles in Turkey. Electric vehicles stand out for their environmental benefits, particularly their potential to reduce CO2 emissions. On a global scale, while countries like China and the United States, which are major sources of emissions, have seen an increase in CO2 emissions, countries such as Norway and Denmark have successfully reduced emissions through the widespread adoption of non-carbon emitting vehicles.
+-   The aim of our project is to examine the impact of electric vehicles (EVs)
+on CO2 emissions and analyze the integration of electric vehicles in Turkey.
+Electric vehicles stand out for their environmental benefits, particularly their potential to reduce CO2 emissions. On a global scale, while countries like China
+and the United States, which are major sources of emissions, have seen an
+increase in CO2 emissions, countries such as Norway and Denmark have
+successfully reduced emissions through the widespread adoption of non-carbon
+emitting vehicles.
 
--   In Turkey, although the number of electric vehicles has increased, there has yet to be a significant decrease in CO2 emissions. The primary reasons for this are infrastructure gaps and limited use of renewable energy sources. This highlights the need for improving the energy infrastructure and rapidly expanding the electric vehicle infrastructure in Turkey. In conclusion, while the adoption of electric vehicles has significant potential to reduce CO2 emissions, the success of this transition depends on factors such as population density and energy infrastructure.
+-   In Turkey, although the number of electric vehicles has increased, there has
+yet to be a significant decrease in CO2 emissions. The primary reasons for this
+are infrastructure gaps and limited use of renewable energy sources. This
+highlights the need for improving the energy infrastructure and rapidly
+expanding the electric vehicle infrastructure in Turkey. In conclusion, while
+the adoption of electric vehicles has significant potential to reduce CO2
+emissions, the success of this transition depends on factors such as population
+density and energy infrastructure.
 
--   Norway and Denmark have achieved great success in adopting electric vehicles because these countries widely use renewable energy sources and have low population densities, making the environmental impact of EVs more pronounced.
+-   Norway and Denmark have achieved great success in adopting electric vehicles because these countries widely use renewable energy sources and have low
+population densities, making the environmental impact of EVs more pronounced.
 
--   On the other hand, China and the United States, with their high population densities and fossil fuel-based energy infrastructures, have been unable to prevent the increase in emissions.
+-   On the other hand, China and the United States, with their high population densities and fossil fuel-based energy infrastructures, have been unable to
+prevent the increase in emissions.
 
--   In particular, China, with its large population and reliance on fossil fuel-based energy production, has increased its electric vehicle sales but has been limited in reducing total CO2 emissions.
-
-![](docs/chillguy-chill.gif){fig-align="center" width="%25"}
+-   In particular, China, with its large population and reliance on fossil
+fuel-based energy production, has increased its electric vehicle sales but has
+been limited in reducing total CO2 emissions.

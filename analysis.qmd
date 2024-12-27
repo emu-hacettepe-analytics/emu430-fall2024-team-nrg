@@ -3,11 +3,18 @@ format:
   html:
     code-tools: true
     code-fold: true
+    sidebar: false
+  pdf:
+    colorlinks: true
+    papersize: a4
+    fontsize: 11pt
+    margin-left: 2cm
+    margin-right: 2cm
+    margin-top: 2cm
+    margin-bottom: 2cm
 execute:
   warning: false
 ---
-
-![](docs/kowalski-analysis-thinking.gif){fig-align="center" width="%20"}
 
 # Library Preparation
 
@@ -70,10 +77,13 @@ non_countries <- c(
 mean_co2_emission_by_country <- my_data3 |> 
   filter(!entity %in% non_countries) |>
   group_by(entity) |>
-  summarize(mean_co2_emission_per_year = mean(transport_co2_emissions, na.rm = TRUE)) |>
-  mutate(entity_lumped = fct_lump_n(entity, n = 20, w = mean_co2_emission_per_year)) |>
+  summarize(mean_co2_emission_per_year = mean(transport_co2_emissions,
+                                              na.rm = TRUE)) |>
+  mutate(entity_lumped = fct_lump_n(entity, n = 20,
+                                    w = mean_co2_emission_per_year)) |>
   group_by(entity_lumped) |>
-  summarize(mean_co2_emission_per_year = mean(mean_co2_emission_per_year, na.rm = TRUE), .groups = "drop")
+  summarize(mean_co2_emission_per_year = mean(mean_co2_emission_per_year,
+                                              na.rm = TRUE), .groups = "drop")
 
 head(mean_co2_emission_by_country)
 ```
@@ -84,9 +94,16 @@ It's needed to see the transportation carbondioxide emission levels of countries
 
 ```{r}
 #| echo: true
-ggplot(mean_co2_emission_by_country, aes(x = reorder(entity_lumped, mean_co2_emission_per_year), y = mean_co2_emission_per_year, fill = entity_lumped)) +
+ggplot(mean_co2_emission_by_country, aes(x = reorder(entity_lumped, mean_co2_emission_per_year),y = mean_co2_emission_per_year,
+                                         fill = entity_lumped)) +
+# AI generated content based on the prompt: I want to plot a graph showing the
+# highest mean carbondioxide emission on the top, lowest on the bottom.
+# Can you aprovide a code? I think there is a reorder() function
+# that could help.
   geom_col(width = 0.5) +
   scale_y_continuous(labels = label_number(scale = 1, accuracy = 1)) +
+# AI generated content based on the prompt: Values are shown as a scientific
+# notation, I want to show them with a standard notation.
   coord_flip() +
   labs(x = "Country",
        y = "Mean CO2 Emission",
@@ -111,7 +128,8 @@ ggplot(mean_co2_emission_by_country, aes(x = reorder(entity_lumped, mean_co2_emi
 After this plot, the group has chosen specific countries to explore their behaviour over time. **United States and China** has chosen for being in first two place in the mean carbondioxide emission standings, **Norway and Denmark** for not being in top 20 countries list, and even they have been successful at decreasing their emission, **Turkey and Japan** to investigate the important parameters that carbondioxide emission is dependent.
 
 ```{r}
-top6_countries <- c("United States", "Norway", "Denmark", "China", "Japan", "Turkey")
+top6_countries <- c("United States", "Norway", "Denmark", "China", "Japan",
+                    "Turkey")
 
 emission_by_country <- my_data3 |>
   filter(entity %in% top6_countries)
@@ -183,7 +201,7 @@ Here are some observations from this graph:
 
 This graphs gives a lot of information about transportation carbondioxide emission levels of those countries. But is it correct to make a decision just by looking at these graphs only? May population be the reason of some countries' low/high total transportation carbondioxide emission levels? Let's analyze it.
 
-# ANALYSIS OF THE POPULATION DATA ALONG WITH CO2 EMISSIONS (my_data3 and my_data8)
+# ANALYSIS OF THE POPULATION DATA ALONG WITH CO2 EMISSIONS (my_data3 & my_data8)
 
 ## The Effect of Population on Transport CO2 Emissions
 
@@ -226,8 +244,8 @@ ggplot(pop_n_co2, aes(x = year, y = prop, color = entity)) +
   labs(x = "Year",
        y = "CO2 Emission (in tons) / Population",
        title = "CO2 Emission per Person",
-       subtitle = "Describes how much carbondioxide emission does a person emits on the average
-(in tons)",
+       subtitle = "Describes how much carbondioxide emission does a person
+       emits on the average (in tons)",
        color = "Entity")
 ```
 
@@ -280,6 +298,10 @@ The types of EV's are summarized below.
 ```{r}
 #| echo: true
 my_data2$region[my_data2$region == "Turkiye"] <- "Turkey"
+# AI generated content based on the prompt: In my R data frame, I have a region
+# column and I have seen that Turkey in one data set is written as Turkiye in
+# another data set so that I want to make Turkiye as Turkey. How can I change
+# it?
 top6_countries = c("USA", "Norway", "Denmark", "China", "Japan", "Turkey")
 no_carbon = c("BEV", "FCEV")
 
@@ -294,7 +316,6 @@ head(top6_ev_sales)
 The line plot below visualizes how the EV Sales of Non-Carbon Vehicles has evolved over the 10-year horizon:
 
 ```{r}
-#| echo: true
 top6_ev_sales |> group_by(year, region, powertrain) |>
   summarize(total_sales = sum(value, na.rm = TRUE), .groups = "drop") |>
   ggplot(aes(x = year, y = total_sales, color = region, linetype = powertrain)) +
@@ -313,8 +334,7 @@ top6_ev_sales |> group_by(year, region, powertrain) |>
   facet_wrap(~ region) +
   theme_light() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  guides(color = "none")
-top6_ev_sales
+  guides(color = "none") # AI generated content based on the prompt: I have two legends in the plot, I want to remove the region legend.
 ```
 
 Here are some observations from this graph:
@@ -325,7 +345,7 @@ Here are some observations from this graph:
 
 3.  It can be seen that **Japan** didn't increase the sales of **BEV's**. Yet, they managed to decrease the total transportation carbondioxide emission by increasing the **FCEV** sales considerably, which means they have done some other applications.
 
-## Exploring the Relationship Between CO2 Emission and Total EV Sales (my_data2 and my_data3)
+## The Relationship Between CO2 Emission & Total EV Sales (my_data2 & my_data3)
 
 So, how carbondioxide emission has been affected by total EV sales?
 
@@ -360,9 +380,11 @@ Now, the total EV sales and transport CO2 emissions can be seen in one tibble.
 The scatter plot below visualizes the behaviour including trend lines connecting these points in each selected country.
 
 ```{r}
-ggplot(my_data2_3_selected, aes(x = total_ev_sales, y = transport_co2_emissions, color = region)) +
+ggplot(my_data2_3_selected, aes(x = total_ev_sales, y = transport_co2_emissions,
+                                color = region)) +
   geom_point(size = 2) +
-  geom_smooth(method = "lm", se = FALSE, linetype = "dashed", size = 0.8, alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE, linetype = "dashed", size = 0.8,
+              alpha = 0.5) +
   scale_x_continuous(trans = "log10",
                      labels = label_number(scale = 1, accuracy = 1)) +
   scale_y_continuous(trans = "log10",
@@ -370,8 +392,8 @@ ggplot(my_data2_3_selected, aes(x = total_ev_sales, y = transport_co2_emissions,
   labs(x = "Total EV Sales",
        y = "CO2 Emission (in tons)",
        title = "Scatter Plot of CO2 Emission vs. Total EV Sales",
-       subtitle = "The correlation between total EV sales and carbondioxide emissions for
-each selected region",
+       subtitle = "The correlation between total EV sales and carbondioxide
+       emissions for each selected region",
        color = "Region") +
   theme_light()
 ```
@@ -483,7 +505,8 @@ The cumulative bar plot below displays the proportion of vehicle types over time
 
 ```{r}
 #| echo: true
-ggplot(tr_vehicle_perc_long, aes(x = year, y = percentage, fill = vehicle_type)) +
+ggplot(tr_vehicle_perc_long, aes(x = year, y = percentage,
+                                 fill = vehicle_type)) +
   geom_bar(stat = "identity", position = "fill", width = 0.8) +
   scale_fill_brewer(palette = "Paired") +
   labs(x = "Year",
@@ -503,10 +526,8 @@ In fact, **non-EV's** were still used widely **in Turkey**, leading to be the on
 
 -   **Key Findings:** While countries like China and the United States have seen an increase in CO2 emissions, Norway and Denmark have demonstrated a decrease in emissions due to strong adoption of non-carbon emitting vehicles.
 
-    Although Turkey has increased the number of electric and hybrid vehicles, overall CO2 emissions have not significantly decreased, highlighting the need for infrastructure improvements and greater use of renewable energy sources.
+Although Turkey has increased the number of electric and hybrid vehicles, overall CO2 emissions have not significantly decreased, highlighting the need for infrastructure improvements and greater use of renewable energy sources.
 
 -   **Factors Influencing Success:** The adoption of electric vehicles is most effective when influenced by factors such as population density and energy infrastructure.
 
 -   **Main Outcome:** The study concludes that while EV adoption has the potential to significantly reduce transportation-related emissions, its effectiveness depends on factors such as population density and the transition to renewable energy sources.
-
-![](docs/jaydenj-kirby.gif){fig-align="center" width="%30"}
